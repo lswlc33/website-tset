@@ -35,6 +35,7 @@ const emoji_list = [
 
 window.onload = function () {
     change_tab_sheet()
+    change_emoji()
     if (isMobileDevice()) {
         // 当前浏览器是手机浏览器
         // hide sidebar
