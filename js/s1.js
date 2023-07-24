@@ -35,7 +35,28 @@ const emoji_list = [
 
 window.onload = function () {
     change_tab_sheet()
+    if (isMobileDevice()) {
+        // 当前浏览器是手机浏览器
+        // hide sidebar
+        sidebar = document.getElementById('sidebar')
+        sidebar.style.display = 'none'
+        // remove marg
+        main = document.getElementById('main')
+        main.style.margin = '0px'
+        main.style.border = 'none'
+        main.style.borderRadius = '0px'
+        main.style.height = '100vh'
+
+    } else {
+        // 当前浏览器不是手机浏览器
+    }
 }
+
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+
 
 function change_tab(c_div) {
     tabs = document.getElementsByClassName('sidebar_item')
