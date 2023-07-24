@@ -1,0 +1,108 @@
+const emoji_list = [
+    'w(ﾟДﾟ)w',
+    '(ノへ￣、)',
+    '(￣_,￣ )',
+    '(๑•̀ㅂ•́)و✧',
+    '(￣ε(#￣)☆╰╮o(￣皿￣///)',
+    'Σ( ° △ °|||)︴',
+    '(*￣rǒ￣)',
+    '╰(￣▽￣)╭',
+    'ヾ(≧▽≦*)o',
+    'o(*≧▽≦)ツ',
+    '（゜▽＾*)',
+    '(๑•̀ㅂ•́)و✧',
+    '〒▽〒',
+    '(ノへ￣、)',
+    '╥﹏╥...',
+    '(ToT)/~~~',
+    '(*￣3￣)╭',
+    '(￣o￣) . z Z',
+    '(∪｡∪)｡｡｡zzz',
+    '（)´д`(）',
+    '(￣_,￣ )',
+    '( ͡° ͜ʖ ͡°)',
+    '(´ｰ∀ｰ`)',
+    '┌( ´_ゝ` )┐',
+    '（ ￣ー￣）',
+    'Ψ(￣∀￣)Ψ',
+    '( *⊙~⊙)',
+    '(＠￣ー￣＠)',
+    'o((⊙﹏⊙))o.',
+    '|(*′口`)',
+    'Σ( ° △ °|||)︴',
+    '…（⊙＿⊙；）…',
+]
+
+window.onload = function () {
+    change_tab_sheet()
+}
+
+function change_tab(c_div) {
+    tabs = document.getElementsByClassName('sidebar_item')
+    // 设置checked属性
+    for (let index = 0; index < tabs.length; index++) {
+        tabs[index].setAttribute('checked', '0')
+    }
+    c_div.setAttribute('checked', '1')
+    change_tab_sheet()
+}
+
+
+function change_tab_sheet() {
+    // 更改样式
+    tabs = document.getElementsByClassName('sidebar_item')
+    for (let index = 0; index < tabs.length; index++) {
+        var the_tab = tabs[index];
+        var checked = the_tab.getAttribute('checked');
+
+        if (checked == 1) {
+            the_tab.style.border = "2px #93abff solid";
+            change_tab_page()
+        } else {
+            the_tab.style.border = "0px black solid";
+        }
+    }
+}
+
+function change_tab_page() {
+    tabs = document.getElementsByClassName('sidebar_item')
+
+    dict = {
+        0: 'home',
+        1: 'setting',
+        2: 'about',
+    }
+    console.log(1)
+    for (let index = 0; index < tabs.length; index++) {
+        var checked = tabs[index].getAttribute('checked');
+        if (checked == 1) {
+            page = document.getElementById(dict[index])
+            page.style.display = 'inline'
+        } else {
+            page = document.getElementById(dict[index])
+            page.style.display = 'none'
+        }
+    }
+}
+
+function create_setting_box() {
+    setting = document.getElementById('roll')
+    setting.innerText(`
+    <div class="setting_item">
+        d
+    </div>
+    
+    `)
+}
+
+function change_emoji() {
+    man_length = emoji_list.length
+    emoji_text = document.getElementById('emoji_text')
+
+    num = Math.floor(Math.random() * (man_length - 0 + 1));
+
+
+
+    emoji_text.innerText = emoji_list[num]
+
+}
