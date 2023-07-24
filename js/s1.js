@@ -46,9 +46,14 @@ window.onload = function () {
         main.style.border = 'none'
         main.style.borderRadius = '0px'
         main.style.height = '100vh'
-
     } else {
         // 当前浏览器不是手机浏览器
+        // remove expand_sidebar
+        icon = document.getElementsByClassName('floating-menu')
+        for (let i = 0; i < icon.length; i++) {
+            const c_icon = icon[i];
+            c_icon.style.display = "none"
+        }
     }
 }
 
@@ -119,11 +124,30 @@ function create_setting_box() {
 function change_emoji() {
     man_length = emoji_list.length
     emoji_text = document.getElementById('emoji_text')
-
     num = Math.floor(Math.random() * (man_length - 0 + 1));
-
-
-
     emoji_text.innerText = emoji_list[num]
 
+}
+
+
+
+function expend_sidebar() {
+    icon = document.getElementsByClassName('floating-menu')
+    sidebar = document.getElementById('sidebar')
+    icon = icon[0]
+    if (icon.innerText == '⬅') {
+        change_expend_text('➡')
+        sidebar.style.display = 'none'
+    } else {
+        change_expend_text('⬅')
+        sidebar.style.display = 'inline'
+    }
+}
+
+function change_expend_text(arr) {
+    icon = document.getElementsByClassName('floating-menu')
+    for (let i = 0; i < icon.length; i++) {
+        const c_icon = icon[i];
+        c_icon.innerText = arr
+    }
 }

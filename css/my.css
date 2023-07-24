@@ -8,6 +8,8 @@
 body {
     background-color: rgb(246, 246, 246);
     margin: 0px;
+    height: 100%;
+    width: 100%;
 }
 
 #main {
@@ -181,4 +183,17 @@ body {
 
 #input_text:focus {
     border: 1px solid rgb(26, 132, 154);
+}
+
+.floating-menu {
+    position: absolute;
+    left: 40px;
+    top: 40px;
+    width: 40px;
+    font-size: 25px;
+    height: 40px;
+    border: 1px solid rgb(26, 132, 154);
+    border-radius: 10px;
+
+
 }
