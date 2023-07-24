@@ -146,8 +146,16 @@ function expend_sidebar() {
 
 function change_expend_text(arr) {
     icon = document.getElementsByClassName('floating-menu')
+
+
+
     for (let i = 0; i < icon.length; i++) {
         const c_icon = icon[i];
         c_icon.innerText = arr
+        if (c_icon.innerText == '⬅') {
+            c_icon.style.left = '190px'
+        } else {
+            c_icon.style.left = '40px'
+        }
     }
 }
