@@ -99,7 +99,6 @@ function change_tab_page() {
         1: 'setting',
         2: 'about',
     }
-    console.log(1)
     for (let index = 0; index < tabs.length; index++) {
         var checked = tabs[index].getAttribute('checked');
         if (checked == 1) {
@@ -127,11 +126,11 @@ function change_emoji() {
     emoji_text = document.getElementById('emoji_text')
     num = Math.floor(Math.random() * (man_length - 0));
     emoji_text.style.opacity = 0
-    
+
     setTimeout(function () {
         emoji_text.style.opacity = 1
         emoji_text.innerHTML = emoji_list[num]
-    },200)
+    }, 200)
 
 }
 
