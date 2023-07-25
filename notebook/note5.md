@@ -63,7 +63,7 @@ flex-direction: row;    // 水平布局
 flex-wrap: nowrap;  // （默认）：不换行
 flex-wrap: wrap;    //  换行
 
-ustify-content: center; // 对齐方式
+justify-content: center; // 对齐方式
 align-items: center;    // 也是，但不一样，具体看文档
 ```
 
@@ -150,6 +150,8 @@ box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
 1. px：就是像素
 
 2. vh、vw
+
+    > 在移动端体验极差啊哈，不要使用啊哈
 
     view height 窗口高度
 
