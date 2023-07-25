@@ -86,7 +86,7 @@ function change_tab_sheet() {
             the_tab.style.border = "2px #93abff solid";
             change_tab_page()
         } else {
-            the_tab.style.border = "0px black solid";
+            the_tab.style.border = "2px rgba(147,171,255,0) solid";
         }
     }
 }
