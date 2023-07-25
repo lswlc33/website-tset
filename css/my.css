@@ -149,6 +149,7 @@ body {
 
 #emoji_text {
     font-size: 40px;
+    text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.75);
 }
 
 #input_box {
