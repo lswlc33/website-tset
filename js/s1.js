@@ -41,6 +41,7 @@ window.onload = function () {
         // hide sidebar
         sidebar = document.getElementById('sidebar')
         sidebar.style.display = 'none'
+        sidebar.style.borderRadius = '0px'
         // remove marg
         main = document.getElementById('main')
         main.style.margin = '0px'
