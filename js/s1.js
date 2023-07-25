@@ -125,8 +125,13 @@ function create_setting_box() {
 function change_emoji() {
     man_length = emoji_list.length
     emoji_text = document.getElementById('emoji_text')
-    num = Math.floor(Math.random() * (man_length - 0 + 1));
-    emoji_text.innerText = emoji_list[num]
+    num = Math.floor(Math.random() * (man_length - 0));
+    emoji_text.style.opacity = 0
+    
+    setTimeout(function () {
+        emoji_text.style.opacity = 1
+        emoji_text.innerHTML = emoji_list[num]
+    },200)
 
 }
 
