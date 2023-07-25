@@ -4,6 +4,7 @@ function create_img_left() {
     var top = Math.random() * (window.innerHeight - 280) + 'px'
 
     img.src = "img/go_left.gif"
+
     img.style.position = `fixed`;
     img.style.left = left
     img.style.transition = 'left 2s'
@@ -16,7 +17,7 @@ function create_img_left() {
 
     setTimeout(() => {
         document.body.removeChild(img)
-    }, 3000);
+    }, 2000);
 
 }
 
@@ -38,15 +39,15 @@ function create_img_right() {
 
     setTimeout(() => {
         document.body.removeChild(img)
-    }, 3000);
+    }, 2000);
 
 }
 
-function create_img() { 
+function create_img() {
     var num = Math.random()
     if (num >= 0.5) {
         create_img_right()
-    } else { 
+    } else {
         create_img_left()
     }
 
