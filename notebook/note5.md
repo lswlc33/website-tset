@@ -171,3 +171,9 @@ box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
     ```css
     width: calc(100% - 80px);
     ```
+
+## 动画效果
+
+```css
+transition: 样式名称 持续时间 曲率;
+```
