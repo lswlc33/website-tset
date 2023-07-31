@@ -1,0 +1,109 @@
+* {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    font-size: 1.2rem;
+    color: white;
+    transition: 0.5s;
+}
+
+
+
+body {
+    display: flex;
+    flex-direction: row;
+}
+
+
+#bgcolor {
+    flex: 1;
+    height: 100svh;
+    background-image: linear-gradient(120deg,
+            rgb(255, 214, 214) 30%,
+            rgb(183, 183, 250));
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: none;
+}
+
+#cardbg {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: min-content;
+    width: min-content;
+    border-radius: 30px;
+    background-color: rgb(50, 50, 50);
+    box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.6);
+}
+
+@media screen and (min-width:480px) {
+    #cardbg {
+        flex-direction: row;
+    }
+}
+
+#left_part {
+    padding-left: 0.75em;
+    padding-right: 5em;
+    display: flex;
+    flex-direction: column;
+    flex: 0;
+
+}
+
+#right_part {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+#welcome_text {
+    margin-left: 0.5em;
+    font-size: 1.5em;
+    margin-top: 1.5em;
+    border-bottom: 4px solid rgb(222, 196, 196);
+}
+
+#login_title {
+    margin: 1.8em;
+    font-size: 1.3em;
+}
+
+.editline {
+
+    padding-bottom: 0.25em;
+    background-color: rgb(50, 50, 50);
+    border: none;
+    text-align: left;
+    width: 10em;
+    border-bottom: 2px solid white;
+    margin: 10px;
+    height: 1.5em;
+    outline: none;
+}
+
+.editline:hover {
+    border-bottom: 2px solid rgb(222, 196, 196);
+}
+
+
+.editline:focus::placeholder {
+    color: rgb(50, 50, 50);
+}
+
+
+.button {
+    margin-top: 1.3em;
+    margin-left: 1em;
+    margin-right: 1em;
+    background-color: rgb(50, 50, 50);
+    border: none;
+}
+
+.button:hover {
+    color: rgb(222, 196, 196);
+}
