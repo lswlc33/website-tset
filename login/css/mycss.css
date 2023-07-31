@@ -4,7 +4,7 @@
     margin: 0;
     font-size: 1.2rem;
     color: white;
-    transition: 0.5s;
+    transition: color 0.5s;
 }
 
 
@@ -35,8 +35,10 @@ body {
     height: min-content;
     width: min-content;
     border-radius: 30px;
-    background-color: rgb(50, 50, 50);
+    background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+
 }
 
 @media screen and (min-width:480px) {
@@ -76,7 +78,7 @@ body {
 .editline {
 
     padding-bottom: 0.25em;
-    background-color: rgb(50, 50, 50);
+    background-color: transparent;
     border: none;
     text-align: left;
     width: 10em;
@@ -90,9 +92,13 @@ body {
     border-bottom: 2px solid rgb(222, 196, 196);
 }
 
+.editline::placeholder {
+    color: rgb(222, 196, 196);
+}
+
 
 .editline:focus::placeholder {
-    color: rgb(50, 50, 50);
+    color: transparent;
 }
 
 
@@ -100,7 +106,7 @@ body {
     margin-top: 1.3em;
     margin-left: 1em;
     margin-right: 1em;
-    background-color: rgb(50, 50, 50);
+    background-color: transparent;
     border: none;
 }
 
