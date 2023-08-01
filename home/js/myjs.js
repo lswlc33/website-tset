@@ -47,7 +47,7 @@ function change_onelrc(){
       const lrc = document.getElementById('lrc')
       const from = document.getElementById('lrc_author')
       lrc.innerText = data.hitokoto
-      from.innerText = data.from
+      from.innerText = '——' + data.from
 
     })
     .catch(console.error)
