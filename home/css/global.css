@@ -105,8 +105,38 @@
 
 #contact_me {
     width: 100%;
+    display: flex;
 }
 
+#contact_me>*{
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+}
+
+#contact_me .contact_ico:nth-child(1) {
+    background: url(../img/email.svg) center center no-repeat;
+    background-size: cover;
+    
+
+}
+
+#contact_me .contact_ico:nth-child(2) {
+    background: url(../img/qq.svg) center center no-repeat;
+    background-size: cover;
+}
+
+#contact_me .contact_ico:nth-child(3) {
+    background: url(../img/wechat.svg) center center no-repeat;
+    background-size: cover;
+
+}
+
+#contact_me .contact_ico:nth-child(4) {
+    background: url(../img/tele.svg) center center no-repeat;
+    background-size: cover;
+
+}
 
 #right {
     height: 100%;
