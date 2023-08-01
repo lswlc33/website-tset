@@ -5,7 +5,8 @@
     justify-content: center;
     align-items: center;
     color: white;
-    font-family: "微软雅黑" ,"Arial Unicode MS"  ;
+    font-family: "微软雅黑", "Arial Unicode MS";
+    font-weight: 500
 }
 
 #background {
@@ -254,7 +255,8 @@
     transition: 0.5s;
     padding: 20px;
     display: flex;
-    font-size: 25px;
+    font-size: 30px;
+    font-weight: 500
 }
 
 #time_box:hover {
