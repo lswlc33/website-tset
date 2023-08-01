@@ -39,6 +39,22 @@ function change_time() {
     clock.innerHTML = c_time
 }
 
+function change_onelrc(){
+
+    fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      const lrc = document.getElementById('lrc')
+      const from = document.getElementById('lrc_author')
+      lrc.innerText = data.hitokoto
+      from.innerText = data.from
+
+    })
+    .catch(console.error)
+}
+
+change_onelrc()
+
 setInterval(() => {
     change_time()
 }, 1000);
