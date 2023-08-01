@@ -4,4 +4,8 @@
     #right {
         display: flex;
     }
+
+    #expend{
+        display: none;
+    }
 }

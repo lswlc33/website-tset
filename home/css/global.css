@@ -108,7 +108,7 @@
     display: flex;
 }
 
-#contact_me>*{
+#contact_me>* {
     width: 30px;
     height: 30px;
     margin: 10px;
@@ -117,7 +117,7 @@
 #contact_me .contact_ico:nth-child(1) {
     background: url(../img/email.svg) center center no-repeat;
     background-size: cover;
-    
+
 
 }
 
@@ -135,7 +135,31 @@
 #contact_me .contact_ico:nth-child(4) {
     background: url(../img/tele.svg) center center no-repeat;
     background-size: cover;
+    transform: scale(0.9);
 
+}
+
+#expend {
+    margin-top: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    transition: 0.5s;
+    padding: 10px;
+}
+
+#expend:active {
+    margin-top: 30px;
+    padding: 5px;
+}
+
+#expend_icon {
+    width: 30px;
+    height: 30px;
+
+    background: url(../img/more.svg) center center no-repeat;
+    background-size: cover;
+    transform: scale(0.9);
 }
 
 #right {
@@ -143,4 +167,92 @@
     width: 100%;
     display: none;
     flex-direction: column;
+}
+
+#box_top {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+
+#lrc_box {
+    height: 75px;
+    width: 100%;
+    margin: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    transition: 0.5s;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#lrc {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+#lrc_author {
+    width: 100%;
+    text-align: right;
+}
+
+
+
+#time_box {
+    height: 75px;
+    width: 100%;
+    margin: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    transition: 0.5s;
+    padding: 20px;
+    display: flex;
+    font-size: 25px;
+}
+
+
+#box_centre{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+#box_centre_icon{
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    background: url(../img/star.svg) center center no-repeat;
+    background-size: cover;
+    transform: scale(0.9);
+}
+
+#box_bottom{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+}
+
+.link_group{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+}
+
+.link_box{
+    height: 70px;
+    width: 24%;
+    margin: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    transition: 0.5s;
+    padding: 20px;
+    display: flex;
+
 }
