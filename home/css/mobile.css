@@ -5,7 +5,11 @@
         display: flex;
     }
 
-    #expend1{
+    #expand1{
+        display: none
+    }
+
+    #expand2{
         display: none
     }
 }

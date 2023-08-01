@@ -4,6 +4,7 @@
 <head>
     <title>主页</title>
     <link rel="stylesheet" href="css/mobile.css">
+    <script src="js/myjs.js"></script>
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
@@ -27,48 +28,41 @@
                     <div class="contact_ico" onclick=""></div>
                     <div class="contact_ico" onclick=""></div>
                 </div>
-                <div id="expend1" class="expend">
-                    <div class="expend_icon"></div>
-                </div>
-            </div>
-            <div id="right">
-                <div id="box_top">
-                    <div id="lrc_box">
-                        <div id="lrc">这是个句子</div>
-                        <div id="lrc_author">这是来源</div>
-                    </div>
-                    <div id="time_box">11:45:14</div>
-                </div>
-                <div id="box_centre">
-                    <div id="box_centre_icon"></div>常用网址导航
-                </div>
-                <div id="box_bottom">
-                    <div id="group1" class="link_group">
-                        <div class="link_box">1</div>
-                        <div class="link_box">2</div>
-                        <div class="link_box">7</div>
-                    </div>
-                    <div id="group1" class="link_group">
-                        <div class="link_box">3</div>
-                        <div class="link_box">4</div>
-                        <div class="link_box">5</div>
-                    </div>
-                    <div id="expend2" class="expend">
-                        <div class="expend_icon"></div>
-                    </div>
-
-                </div>
-
-
-
-
-
-
+                <div id="expand1" class="expand" onclick="expand_open()">
+                    <div class=" expand_icon"></div>
             </div>
         </div>
-        <div id="buttom_bar">
-            © 1990 - 2023 GitHub Inc.
+        <div id="right">
+            <div id="box_top">
+                <div id="lrc_box">
+                    <div id="lrc">这是个句子</div>
+                    <div id="lrc_author">这是来源</div>
+                </div>
+                <div id="time_box">11:45:14</div>
+            </div>
+            <div id="box_centre">
+                <div id="box_centre_icon"></div>常用网址导航
+            </div>
+            <div id="box_bottom">
+                <div id="group1" class="link_group">
+                    <div class="link_box">1</div>
+                    <div class="link_box">2</div>
+                    <div class="link_box">7</div>
+                </div>
+                <div id="group1" class="link_group">
+                    <div class="link_box">3</div>
+                    <div class="link_box">4</div>
+                    <div class="link_box">5</div>
+                </div>
+                <div id="expand2" class="expand" onclick="expand_close()">
+                    <div class="expand_icon"></div>
+                </div>
+            </div>
         </div>
+    </div>
+    <div id="buttom_bar">
+        © 1990 - 2023 GitHub Inc.
+    </div>
     </div>
 </body>
 

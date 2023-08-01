@@ -139,7 +139,7 @@
 
 }
 
-.expend {
+.expand {
     margin-top: 20px;
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
@@ -148,12 +148,12 @@
     padding: 10px;
 }
 
-.expend:active {
+.expand:active {
     margin-top: 30px;
     padding: 5px;
 }
 
-.expend_icon {
+.expand_icon {
     width: 30px;
     height: 30px;
 
@@ -257,6 +257,6 @@
 
 }
 
-#expend2{
-    display: none
+#expand2{
+    display: inline
 }
