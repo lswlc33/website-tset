@@ -3,24 +3,24 @@
     /* border: 1px black solid; */
     color: rgb(48, 48, 48);
     text-align: center;
+    margin: 0px;
 }
 
 body {
     background-color: rgb(246, 246, 246);
-    margin: 0px;
-    height: 100%;
+    height: calc(100svh - 10px);
     width: 100%;
 }
 
 #main {
-    margin: 25px 25px 25px 25px;
+    margin: 10px;
     border-radius: 30px;
     border: 2px rgb(222, 222, 222) solid;
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
     display: flex;
     background-color: white;
     flex-direction: row;
-    height: 90vh;
+    height: calc(100% - 20px);
     min-height: 450px;
     min-width: 510px;
 
