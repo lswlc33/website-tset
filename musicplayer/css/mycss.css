@@ -83,14 +83,13 @@
     flex-wrap: nowrap;
     width: 100%;
     height: calc(66dvh - 150px);
-
+    overflow: hidden;
 }
 
 #lrc_box {
     position: relative;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     transition: 0.3s;
 }
 
@@ -101,6 +100,7 @@
     color: rgba(255, 255, 255, 0.7);
     font-weight: 300;
     font-size: 12px;
+    height: 15px;
 }
 
 .lrc_line_select {
@@ -110,4 +110,5 @@
     transition: 0.5s;
     font-weight: 600;
     font-size: 12px;
+    height: 15px;
 }
