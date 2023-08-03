@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player</title>
+</head>
+
+<body>
+    <div id="background">
+        <div id="content">
+            <div id="control">
+                <div id="title">音乐名称</div>
+                <div id="singer">歌手</div>
+                <div id="control_icon">
+                    <div id="before" onclick="">前进</div>
+                    <div id="play" onclick="play_music()">播放</div>
+                    <div id="after" onclick="">后退</div>
+                </div>
+                <div id="progress_bar">
+                    <div id="played_time">00:00</div>
+                    <div id="music_progress">
+                        <div id="music_progress_played"></div>
+                    </div>
+                    <div id="total_time">00:00</div>
+                </div>
+                <div id="divi_line"></div>
+                <div id="lrc_box_bar">
+                    <div id="lrc_box"></div>
+                </div>
+            </div>
+            <div id="lrc">
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+    <audio id="music" src="res/jntm.mp3"></audio>
+    <script src="js/music_control.js"></script>
+    <link rel="stylesheet" href="css/mycss.css">
+</body>
+
+</html>
