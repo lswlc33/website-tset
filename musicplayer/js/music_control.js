@@ -16,8 +16,6 @@ var music_list = [
 
 
 function init_lrc(lrc_file) {
-    var lrc_list = read_lrc(lrc_file)
-
     for (let i = 0; i < lrc_list.length; i++) {
         const element = lrc_list[i];
         var lrc = document.createElement('div')
@@ -43,6 +41,7 @@ function play_music() {
 }
 
 var last_index
+var translatepx = 0
 
 audio.addEventListener("timeupdate", function () {
     var all_time = audio.duration
@@ -62,6 +61,8 @@ audio.addEventListener("timeupdate", function () {
         var lsat_select_lrc = document.getElementById('lrc_line_' + (index - 1))
         lsat_select_lrc.className = 'lrc_line'
         last_index = index
+        translatepx -= 10
+        lrc_box.style.transform = "translateY(" + translatepx + "px)"
     }
 })
 
@@ -114,5 +115,5 @@ function find_lrc_index(lrc_list) {
     return I
 
 }
-
-init_lrc(lrc_file)
+var lrc_list =  read_lrc(lrc_file)
+init_lrc(lrc_list)

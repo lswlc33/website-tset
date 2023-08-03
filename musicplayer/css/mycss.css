@@ -71,7 +71,6 @@
 }
 
 #divi_line {
-    font-weight: ;
     background-color: rgba(255, 255, 255, 0.2);
     width: 100%;
     margin-top: 20px;
@@ -91,8 +90,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 100%;
     overflow: hidden;
+    transition: 0.3s;
 }
 
 
