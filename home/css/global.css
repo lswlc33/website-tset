@@ -9,12 +9,17 @@
     font-weight: 500;
 }
 
+a {
+    text-decoration: none;
+}
+
+
 #background {
     position: fixed;
     left: 0;
     width: 100dvw;
     height: 100dvh;
-    background: url('../img/background1.jpg') center center no-repeat;
+    background: background_img center center no-repeat;
     background-size: cover;
 }
 
@@ -82,7 +87,7 @@
     transform: scale(0.9);
 }
 
-#website_title>* {
+#suffix {
     font-size: 30px;
 }
 

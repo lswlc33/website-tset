@@ -53,7 +53,6 @@ onload = function () {
     document.addEventListener('mousemove', function () {
         var mouseX = event.clientX - 10;
         var mouseY = event.clientY - 10;
-        console.log(mouseX, mouseY)
         change_cursor_position(mouseX, mouseY);
     })
 }

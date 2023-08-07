@@ -2,10 +2,8 @@
 <html>
 
 <head>
-    <title>雪中明月の主页</title>
+    <title></title>
     <link rel="stylesheet" href="css/mobile.css">
-    <script src="js/myjs.js"></script>
-    <script src="js/cursor.js"></script>
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
@@ -16,55 +14,62 @@
     <div id="content">
         <div id="inside_content">
             <div id="left">
-                <div id="website_title">雪中明月
-                    <span>.top</span>
+                <div id="website_title">
+                    <span id="donmin"></span>
+                    <span id="suffix"></span>
                 </div>
                 <div id="scentence">
-                    <div>Here is a scentence</div>
-                    <div>呼噜呼噜喝~~~</div>
+                    <div></div>
+                    <div></div>
                 </div>
                 <div id="contact_me">
-                    <div class="contact_ico" onclick=""></div>
-                    <div class="contact_ico" onclick=""></div>
-                    <div class="contact_ico" onclick=""></div>
-                    <div class="contact_ico" onclick=""></div>
+                    <div class="contact_ico"></div>
+                    <div class="contact_ico"></div>
+                    <div class="contact_ico"></div>
+                    <div class="contact_ico"></div>
                 </div>
                 <div id="expand1" class="expand" onclick="expand_open()">
                     <div class=" expand_icon"></div>
+                </div>
+            </div>
+            <div id="right">
+                <div id="box_top">
+                    <div id="lrc_box" onclick="change_onelrc()">
+                        <div id="lrc">努力加载中</div>
+                        <div id="lrc_author">. . . . . .</div>
+                    </div>
+                    <div id="time_box">00:00:00</div>
+                </div>
+                <div id="box_centre">
+                    <div id="box_centre_icon"></div>常用网址导航
+                </div>
+                <div id="box_bottom">
+                    <div id="group1" class="link_group">
+                        <div class="link_box"></div>
+                        <div class="link_box"></div>
+                        <div class="link_box"></div>
+                    </div>
+                    <div id="group1" class="link_group">
+                        <div class="link_box"></div>
+                        <div class="link_box"></div>
+                        <div class="link_box"></div>
+                    </div>
+                    <div id="expand2" class="expand" onclick="expand_close()">
+                        <div class="expand_icon"></div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="right">
-            <div id="box_top">
-                <div id="lrc_box" onclick="change_onelrc()">
-                    <div id="lrc">努力加载中</div>
-                    <div id="lrc_author">. . . . . .</div>
-                </div>
-                <div id="time_box">00:00:00</div>
-            </div>
-            <div id="box_centre">
-                <div id="box_centre_icon"></div>常用网址导航
-            </div>
-            <div id="box_bottom">
-                <div id="group1" class="link_group">
-                    <div class="link_box">网盘</div>
-                    <div class="link_box">博客</div>
-                    <div class="link_box">项目</div>
-                </div>
-                <div id="group1" class="link_group">
-                    <div class="link_box">音乐</div>
-                    <div class="link_box">聊天</div>
-                    <div class="link_box">篮球</div>
-                </div>
-                <div id="expand2" class="expand" onclick="expand_close()">
-                    <div class="expand_icon"></div>
-                </div>
-            </div>
+        <div id="buttom_bar">
+            loading ... ...
         </div>
-    </div>
-    <div id="buttom_bar">
-        loading ... ...
-    </div>
     </div>
 </body>
+
+<footer>
+    <script src="js/config.js"></script>
+    <script src="js/myjs.js"></script>
+    <script src="js/cursor.js"></script>
+</footer>
 
 </html>

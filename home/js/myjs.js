@@ -59,17 +59,4 @@ function change_onelrc() {
     .catch(console.error)
 }
 
-// 页脚信息
-function change_footer() {
-  var date = new Date();
-  var year = date.getFullYear();
-  var buttom_bar = document.getElementById('buttom_bar')
-  buttom_bar.innerHTML =
-    "Copyright © "
-    + year
-    + " 雪中明月 & 萌ICP备20220479号"
-}
-
-setTimeout(() => {
-  change_footer()
-}, 10);
+init_config()
