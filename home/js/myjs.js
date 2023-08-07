@@ -50,10 +50,15 @@ function change_onelrc() {
   fetch('https://v1.hitokoto.cn')
     .then(response => response.json())
     .then(data => {
-      const lrc = document.getElementById('lrc')
-      const from = document.getElementById('lrc_author')
-      lrc.innerText = data.hitokoto
-      from.innerText = '——' + data.from
+      if (data.length > 25) {
+        change_onelrc()
+      } else {
+        const lrc = document.getElementById('lrc')
+        const from = document.getElementById('lrc_author')
+        lrc.innerText = data.hitokoto
+        from.innerText = '——' + data.from
+      }
+
 
     })
     .catch(console.error)
