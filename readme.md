@@ -21,3 +21,6 @@ https://lswlc33.github.io/website-tset/musicplayer
 
 https://lswlc33.github.io/website-tset/zimeng  
 一个界面模仿 [ChatGPT-Next-Web](https://github.com/Yidadaa/ChatGPT-Next-Web) ，点击会切换随机表情
+
+https://lswlc33.github.io/website-tset/yuanshen  
+原神开屏动画+自带下载原神  
