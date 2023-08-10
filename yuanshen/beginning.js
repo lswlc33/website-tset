@@ -109,7 +109,7 @@ function getlink() {
     if (userAgent.match(/iphone|ipad|ipod/)) {
         location.href = "itms-appss://apps.apple.com/cn/app/%E5%8E%9F%E7%A5%9E/id1467190251?mt=8";
     } else if (userAgent.match(/android/)) {
-        location.href = 'market://details?id=com.miHoYo.Yuanshen'
+        location.href = 'intent://' + 'com.miHoYo.Yuanshen' + '#Intent;scheme=package;package=' + 'com.miHoYo.Yuanshen' + ';end';
         location.href = "https://ys-api.mihoyo.com/event/download_porter/link/ys_cn/official/android_default";
     } else {
         location.href = "https://ys-api.mihoyo.com/event/download_porter/link/ys_cn/official/pc_default";
