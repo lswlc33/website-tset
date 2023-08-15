@@ -69,7 +69,7 @@ function creat_kafuka() {
 
     kafuka.src = 'img/kafuka.gif'
     kafuka.style.top = '100dvh'
-    kafuka.style.left = `calc(${100 * Math.random()}dvh - ${kafuka.offsetHeight / 2}px)`
+    kafuka.style.left = `calc(${100 * Math.random()}dvw - ${kafuka.offsetHeight / 2}px)`
     kafuka.style.position = 'fixed'
     kafuka.style.height = `${40 * img_size}px`
     kafuka.style.width = `${40 * img_size}px`
