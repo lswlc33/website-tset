@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卡夫卡</title>
+</head>
+
+<body>
+    <div id="setting" class="setting_2" onclick="change_size(event)">
+        <div style="height: 200px;width: 400px;">
+            <div id="setting_bar">
+                <div id="setting_icon"></div>
+                <div id="setting_text">设置</div>
+            </div>
+            <div id="setting_body">
+                <div class="item">
+                    <div class="item_name">自动生成:</div>
+                    <div id="autogen" class="switch" onclick="change_autogen(event)">
+                        <div class="switch_bu"></div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item_name">生成速度:</div>
+                    <input type="number" id="run_speed" class="item_obj" value="10">
+                </div>
+                <div class="item">
+                    <div class="item_name">最大大小:</div>
+                    <input type="number" id="max_size" class="item_obj" value="10">
+                </div>
+                <div class="item">
+                    <div class="item_name">最小大小:</div>
+                    <input type="number" id="min_size" class="item_obj" value="5">
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <script src="./1.js"></script>
+    <link rel="stylesheet" href="global.css">
+</body>
+
+</html>

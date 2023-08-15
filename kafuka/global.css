@@ -1,0 +1,131 @@
+* {
+    text-align: center;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+body {
+    display: flex;
+    height: 100dvh;
+    font-size: 20px;
+    color: white;
+}
+
+.setting {
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    background: gray;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    transition: 0.5s;
+    overflow: hidden;
+
+}
+
+.setting:hover {
+    transform: scale(1.1);
+}
+
+.setting_2 {
+    width: 400px;
+    height: 240px;
+    border-radius: 40px;
+    background: gray;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    transition: 0.5s;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.setting_2:hover {
+    transform: scale(1.05);
+}
+
+#setting_bar {
+    padding: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+#setting_icon {
+    width: 30px;
+    height: 30px;
+    background: url('./img/setting.svg');
+    background-size: cover;
+}
+
+#setting_text {
+    margin-left: 10px;
+    text-align: left;
+    flex: 1;
+}
+
+#setting_body {
+    width: 100%;
+}
+
+.item {
+    margin: 20px;
+    display: flex;
+}
+
+.item_name {
+    flex: 1;
+    text-align: left;
+}
+
+.switch {
+    width: 50px;
+    height: 25px;
+    border-radius: 25px;
+    background-color: white;
+    box-shadow: inset 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+    transition: 0.5s;
+}
+
+.switch_bu {
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    background-color: rgba(30, 30, 30, 1);
+    transition: 0.5s;
+}
+
+.switch_on {
+    width: 50px;
+    height: 25px;
+    border-radius: 25px;
+    background-color: rgb(205, 205, 205);
+    box-shadow: inset 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+    transition: 0.5s;
+}
+
+.switch_bu_on {
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    background-color: rgba(30, 30, 30, 1);
+    transform: translateX(25px);
+    transition: 0.5s;
+}
+
+.item_obj {
+    outline: none;
+    background-color: transparent;
+    border: 0px;
+    width: 30px;
+    border-right: 4px white solid;
+    text-align: right;
+    padding-right: 20px;
+    font-size: 18px;
+    color: white;
+}
+
+
+.item_obj::-webkit-inner-spin-button {
+    appearance: none;
+}
