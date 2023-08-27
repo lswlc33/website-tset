@@ -1,15 +1,20 @@
-* {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    color: rgb(60, 60, 67);
-}
-
 :root {
     --primary-color: rgb(252, 91, 141);
     --secondary-color: rgb(192, 192, 194);
     --hover-color: rgb(227, 227, 229);
+    --text-color: rgb(60, 60, 67);
 }
+
+* {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: var(--text-color);
+    font-family: "微软雅黑", "Arial Unicode MS";
+
+}
+
+
 
 body {
     display: flex;
@@ -26,6 +31,14 @@ body {
     justify-content: center
 }
 
+#logo{
+    position: fixed;
+    top: 3px;
+    left: 10px;
+    transform: scale(1.3);
+    color: var(--primary-color);
+}
+
 #bottom_bar {
     font-weight: 600;
     height: 2em;
@@ -38,7 +51,7 @@ body {
 #sidebar {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 4em;
     height: 100%;
     border-right: 1px solid var(--secondary-color);
     user-select: none;
@@ -52,22 +65,7 @@ body {
     height: 100%;
 }
 
-#title {
-    font-size: 30px;
-    margin-top: 40px;
-    margin-bottom: 0;
-    color: var(--primary-color);
-    font-weight: 800;
-    transform-origin: left;
-    transition: 0.5s;
-}
 
-#title_sum {
-    font-size: 15px;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    font-weight: 800;
-}
 
 .sidebar_item {
     position: relative;
@@ -84,27 +82,11 @@ body {
 }
 
 .sidebar_item :nth-child(1) {
-    padding-left: 1.1em;
+    padding-left: 1em;
     font-size: 20px;
     font-weight: 600;
     transition: 0.5s;
-}
-
-.sidebar_item :nth-child(2) {
-    padding-left: 1.1em;
-    font-size: 20px;
-    font-weight: 600;
-    transition: 0.5s;
-}
-
-
-
-.sidebar_item:hover :nth-child(1) {
-    background-color: var(--hover-color);
-}
-
-.sidebar_item:hover :nth-child(2) {
-    background-color: var(--hover-color);
+    transform: scale(1.3);
 }
 
 #float_line {
@@ -127,25 +109,4 @@ iframe {
     height: 100%;
 }
 
-@media screen and (max-width:768px) {
-    #sidebar {
-        width: 4em;
-    }
-
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --primary-color: rgb(252, 91, 141);
-        --hover-color: rgb(49, 49, 54) --secondary-color: black;
-    }
-
-    * {
-        margin: 0;
-        padding: 0;
-        text-align: center;
-        color: rgb(246, 246, 247);
-        background-color: rgb(30, 30, 32);
-    }
-
-}
+@media screen and (max-width:768px) {}
