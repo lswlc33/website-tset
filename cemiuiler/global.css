@@ -5,6 +5,12 @@
     color: rgb(60, 60, 67);
 }
 
+:root {
+    --primary-color: rgb(252, 91, 141);
+    --secondary-color: rgb(192, 192, 194);
+    --hover-color: rgb(227, 227, 229);
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -14,7 +20,7 @@ body {
 #top_bar {
     font-weight: 600;
     height: 2em;
-    border-bottom: 3px solid rgb(192, 192, 194);
+    border-bottom: 1px solid var(--secondary-color);
     display: flex;
     align-items: center;
     justify-content: center
@@ -23,7 +29,7 @@ body {
 #bottom_bar {
     font-weight: 600;
     height: 2em;
-    border-top: 3px solid rgb(192, 192, 194);
+    border-top: 1px solid var(--secondary-color);
     display: flex;
     align-items: center;
     justify-content: center
@@ -34,7 +40,7 @@ body {
     flex-direction: column;
     width: 200px;
     height: 100%;
-    border-right: 3px solid rgb(192, 192, 194);
+    border-right: 1px solid var(--secondary-color);
     user-select: none;
     overflow-x: hidden;
     transition: 0.5s;
@@ -50,7 +56,7 @@ body {
     font-size: 30px;
     margin-top: 40px;
     margin-bottom: 0;
-    color: rgb(252, 91, 141);
+    color: var(--primary-color);
     font-weight: 800;
     transform-origin: left;
     transition: 0.5s;
@@ -74,26 +80,38 @@ body {
 }
 
 .sidebar_item:hover {
-    background-color: rgb(227, 227, 229);
+    background-color: var(--hover-color);
 }
 
 .sidebar_item :nth-child(1) {
     padding-left: 1.1em;
     font-size: 20px;
     font-weight: 600;
+    transition: 0.5s;
 }
 
 .sidebar_item :nth-child(2) {
     padding-left: 1.1em;
     font-size: 20px;
     font-weight: 600;
+    transition: 0.5s;
+}
+
+
+
+.sidebar_item:hover :nth-child(1) {
+    background-color: var(--hover-color);
+}
+
+.sidebar_item:hover :nth-child(2) {
+    background-color: var(--hover-color);
 }
 
 #float_line {
     position: absolute;
     width: 5px;
     top: 0;
-    background-color: rgb(252, 91, 141);
+    background-color: var(--primary-color);
     height: 100%;
     transition: 0.5s;
     z-index: 1;
@@ -111,14 +129,23 @@ iframe {
 
 @media screen and (max-width:768px) {
     #sidebar {
-        display: flex;
-        flex-direction: column;
         width: 4em;
-        height: 100%;
-        border-right: 3px solid rgb(192, 192, 194);
-        user-select: none;
-        overflow-x: hidden;
-        transition: 0.5s;
     }
-    
+
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: rgb(252, 91, 141);
+        --hover-color: rgb(49, 49, 54) --secondary-color: black;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        color: rgb(246, 246, 247);
+        background-color: rgb(30, 30, 32);
+    }
+
 }
