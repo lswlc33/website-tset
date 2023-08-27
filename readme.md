@@ -27,3 +27,6 @@
 
 7. https://lswlc33.github.io/website-tset/kafuka  
 带设置UI的 [1.bachong](https://lswlc33.github.io/website-tset/bachong) 也就是第一个
+
+8. https://lswlc33.github.io/website-tset/cemiuiler  
+模仿VSCode
