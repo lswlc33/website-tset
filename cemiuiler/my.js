@@ -6,7 +6,11 @@ function change_active() {
         // 切换高亮
         const sidebar_item = sidebar_items[floor];
         if (this == sidebar_item) {
+            // 浮标移动
             float_line.style.top = `${100 * floor}%`
+            // 页面切换
+            var sidebar_expend_box = document.querySelector('#sidebar_expend_box')
+            sidebar_expend_box.style.transform= `translate(${-200 * floor}px, 0px)`
             return
         }
     }
@@ -14,8 +18,10 @@ function change_active() {
 
 function change_sidebar_active() {
     var sidebar_expend = document.querySelector('#sidebar_expend')
+
     if (sidebar_expend.className == 'sidebar_expend') {
         sidebar_expend.className = 'sidebar_expend_active'
+
     } else {
         sidebar_expend.className = 'sidebar_expend'
     }
