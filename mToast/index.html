@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="toast.js"></script>
+    <script>
+        function htmlShowToast() {
+            showToast(
+                document.getElementById('title').value,
+                document.getElementById('text').value
+            )
+        }
+    </script>
+</head>
+
+<body>
+    Title: <input type="text" id="title" value="423432"><br>
+    Text: <input type="text" id="text" value="5354"><br>
+    <input type="button" value="showToast" onclick="htmlShowToast()">
+</body>
+
+</html>
