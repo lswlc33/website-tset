@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="bgcontainer">
+        <video muted src="https://www.yuanshen.com/medias/bg.3e78e808.mp4" id="background" autoplay="autoplay" loop="loop"></video>
+    </div>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #bgcontainer{
+            /* 使背景图片不超出容器 */
+            overflow: hidden;
+            height: 100dvh;
+            width: 100dvw;
+        }
+        #background{
+            
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* 缩放填充 */
+            transform: scale(1.1);
+
+        }
+    </style>
+
+    <script>
+        // 为元素添加动态效果
+        function createDynamicEffect(innerdiv, outerdiv) {
+            var innerdiv = document.querySelector(innerdiv)
+            innerdiv.addEventListener('mousemove', (event) => {
+                var x = event.clientX;
+                var y = event.clientY;
+                x = x - innerdiv.offsetWidth/2;
+                y = y - innerdiv.offsetHeight/2;
+
+                innerdiv.style.transition = 'none'
+                innerdiv.style.transform = `scale(1.1) translate(${-x/100}px,${-y/100}px)`;
+            })
+        }
+
+        createDynamicEffect('#background','#position')
+    </script>
+</body>
+</html>

@@ -34,3 +34,5 @@
 9. https://lswlc33.github.io/website-tset/mToast  
 一个简约Toast.js  
 
+10. https://lswlc33.github.io/website-tset/spbg  
+为背景添加简单鼠标响应的动态效果
