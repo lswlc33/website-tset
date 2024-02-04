@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Leckerli+One">
+</head>
+
+<body>
+    <div id="background">
+        <div id="content">
+            <div id="title">Donate</div>
+            <div id="card">
+                <div id="qr_switch_div">
+                    <div id="qr_switch">
+                        <div id="qr_switch_alipay">Alipay</div>
+                        <div id="qr_switch_wechat">Wechat</div>
+                    </div>
+                </div>
+                <div id="qr_code">
+                    <img id="alipay" class="qr_code_img" src="img/a.png" alt="alipay">
+                    <img id="wechat" class="qr_code_img" src="img/w.png" alt="wechat">
+                </div>
+                <div>Thank you!</div>
+            </div>
+        </div>
+</body>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        font-family: "Leckerli One", palatino, serif;
+    }
+
+    #background {
+        width: 100dvw;
+        height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #content {
+        max-width: 300px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #title {
+        font-size: 60px;
+        font-weight: 800;
+        margin-bottom: 20px;
+    }
+
+    #card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+        border: 3px solid black;
+        border-radius: 50px;
+        font-size: 20px;
+    }
+
+    #qr_switch_div {
+
+        display: flex;
+        justify-content: center;
+        font-weight: 800;
+    }
+
+    #qr_switch {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    #qr_switch_alipay {
+        padding: 5px 10px 5px 15px;
+        background-color: black;
+        color: white;
+        border: 3px solid black;
+        border-right: none;
+        border-radius: 99px 0 0 99px;
+        transition: 1s;
+    }
+
+    #qr_switch_wechat {
+        padding: 5px 15px 5px 10px;
+        border: 3px solid black;
+        border-radius: 0 99px 99px 0;
+        transition: 1s;
+    }
+
+    #qr_code {
+        padding: 20px 10px;
+    }
+
+    .qr_code_img {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    #wechat {
+        display: none;
+    }
+</style>
+
+<script>
+    var alipay = document.getElementById('alipay');
+    var wechat = document.getElementById('wechat');
+    var qr_switch_alipay = document.getElementById('qr_switch_alipay');
+    var qr_switch_wechat = document.getElementById('qr_switch_wechat');
+
+    qr_switch_alipay.addEventListener('click', function () {
+        alipay.style.display = 'block';
+        wechat.style.display = 'none';
+        qr_switch_alipay.style.backgroundColor = 'black';
+        qr_switch_wechat.style.backgroundColor = 'white';
+        qr_switch_alipay.style.color = 'white';
+        qr_switch_wechat.style.color = 'black';
+
+    })
+
+    qr_switch_wechat.addEventListener('click', function () {
+        alipay.style.display = 'none';
+        wechat.style.display = 'block';
+        qr_switch_alipay.style.backgroundColor = 'white';
+        qr_switch_wechat.style.backgroundColor = 'black';
+        qr_switch_alipay.style.color = 'black';
+        qr_switch_wechat.style.color = 'white';
+
+    })
+
+</script>
+
+</html>
