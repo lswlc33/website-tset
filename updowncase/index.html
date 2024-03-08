@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="global.css">
+    <script src="js/toast.js"></script>
+    <title>昵称生成器</title>
+</head>
+
+<body>
+    <div id="container">
+        <div class="com1">
+            <div id="title">上下标名称生成器</div>
+            <div id="title_2">PRO MAX版</div>
+        </div>
+        <div class="com1">
+            <div class="cell_title">使用说明</div>
+            <div class="cell_cont">
+                <div>在输入中输入文字，离开输入焦点即可在输出中看到结果，不过由于拥有特殊形式的文字毕竟是少数，可能有一些会原样输出</div>
+                <div> 现有的：</div>
+                <div>- 数字与部分符号的上下标</div>
+                <div>- 部分大小写字母的上标</div>
+                <div>- 部分小写字母的下标</div>
+            </div>
+
+        </div>
+        <div class="com1">
+            <div class="cell_title">输入</div>
+            <div class="cell_cont">
+                <input id="input" class="textbox"></input>
+                <div class="button_box">
+                    <button class="button" onclick="change_type(0)">上标</button>
+                    <button class="button" onclick="change_type(1)">下标</button>
+                </div>
+            </div>
+        </div>
+        <div class="com1">
+            <div class="cell_title">输出（自动）</div>
+            <div class="cell_cont">
+                <input id="output" class="textbox"></input>
+                <div class="button_box">
+                    <button class="button" onclick="copy()">复制</button>
+                </div>
+            </div>
+        </div>
+        <div class="com1">
+            <div class="cell_title">鸣谢</div>
+            <div class="cell_cont">米哈游科技</div>
+        </div>
+    </div>
+    <script src="js/tran.js"></script>
+</body>
+
+</html>
