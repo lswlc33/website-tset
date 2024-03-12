@@ -1,6 +1,6 @@
 // 网站信息设置
 const website_name = "雪月导航";
-const website_logo_img = "../img/fashion.svg";
+const website_logo_img = "./img/fashion.svg";
 const website_description = "这是一个网站导航站点！";
 const website_footer = "<br> 雪中明月 all rights reserved.";
 const search_box_placeholder = "杂鱼，有本事往这扣字啊~";
