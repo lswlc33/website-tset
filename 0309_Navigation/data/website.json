@@ -1,0 +1,107 @@
+{
+  "data": [
+    {
+      "name": "影视导航",
+      "tab": [
+        {
+          "name": "影视网站",
+          "site": [
+            {
+              "title": "影视1",
+              "url": "https://www.example1.com/",
+              "icon": "icon1.png",
+              "desc": "网站描述1"
+            },
+            {
+              "title": "影视2",
+              "url": "https://www.example2.com/",
+              "icon": "icon2.png",
+              "desc": "网站描述2"
+            },
+            {
+              "title": "影视3",
+              "url": "https://www.example3.com/",
+              "icon": "icon3.png",
+              "desc": "网站描述3"
+            }
+          ]
+        },
+        {
+          "name": "影视下载",
+          "site": [
+            {
+              "title": "下载4",
+              "url": "https://www.example4.com/",
+              "icon": "icon4.png",
+              "desc": "网站描述4"
+            },
+            {
+              "title": "下载5",
+              "url": "https://www.example5.com/",
+              "icon": "icon5.png",
+              "desc": "网站描述5"
+            },
+            {
+              "title": "下载6",
+              "url": "https://www.example6.com/",
+              "icon": "icon6.png",
+              "desc": "网站描述6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "音乐导航",
+      "tab": [
+        {
+          "name": "在线音乐",
+          "site": [
+            {
+              "title": "网站标题7",
+              "url": "https://www.example7.com/",
+              "icon": "icon7.png",
+              "desc": "网站描述7"
+            },
+            {
+              "title": "网站标题8",
+              "url": "https://www.example8.com/",
+              "icon": "icon8.png",
+              "desc": "网站描述8"
+            },
+            {
+              "title": "网站标题9",
+              "url": "https://www.example9.com/",
+              "icon": "icon9.png",
+              "desc": "网站描述9"
+            }
+          ]
+        },
+        {
+          "name": "音乐下载",
+          "site": [
+            {
+              "title": "网站标题10",
+              "url": "https://www.example10.com/",
+              "icon": "icon10.png",
+              "desc": "网站描述10"
+            },
+            {
+              "title": "网站标题11",
+              "url": "https://www.example11.com/",
+              "icon": "icon11.png",
+              "desc": "网站描述11"
+            },
+            {
+              "title": "网站标题12",
+              "url": "https://www.example12.com/",
+              "icon": "icon12.png",
+              "desc": "网站描述12"
+            }
+          ]
+        }
+      ]
+    }
+
+  ]
+}

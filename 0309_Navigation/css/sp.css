@@ -1,0 +1,12 @@
+@media (min-width: 700px) {
+  .tab_site_box {
+    width: 33%;
+  }
+  #content_main{
+    width: 80%;
+  }
+  .content_footer{
+    width: 80%;
+  }
+}
+
