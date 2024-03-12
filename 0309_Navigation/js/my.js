@@ -216,28 +216,17 @@ function init_page() {
     })
 }
 
-fetch('data/website.json')
-    .then(response => response.json())
-    .then(data => {
-        // 创建侧边栏与卡片
-        createCards(data.data);
-        createSidebarItems(data.data);
-
-        // 初始化
-        init_page()
-    });
 
 
-// config加载
+// 1. 设置加载
 function set_config(css, con) {
     if (css.includes('search_box')) {
         document.querySelector('.search_box').setAttribute('placeholder', con)
-    } else if (css.includes('img')){
+    } else if (css.includes('img')) {
         document.querySelector(css).setAttribute('src', con)
-    }else if (css.includes('favicon')) {
+    } else if (css.includes('favicon')) {
         document.querySelector('#favicon').setAttribute('href', con)
-    }
-    document.querySelector(css).innerHTML = con
+    } document.querySelector(css).innerHTML = con
 }
 
 set_config('title', website_name)
@@ -250,3 +239,16 @@ set_config('.content_footer_card_co',
 set_config('.search_box', search_box_placeholder)
 set_config('#sidebar_header_img', website_logo_img)
 set_config('#favicon', website_logo_img)
+
+
+// 2. 数据加载
+fetch('data/website.json')
+    .then(response => response.json())
+    .then(data => {
+        // 创建侧边栏与卡片
+        createCards(data.data);
+        createSidebarItems(data.data);
+
+        // 初始化
+        init_page()
+    });
