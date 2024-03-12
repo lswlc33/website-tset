@@ -156,7 +156,6 @@
 
 #content {
     width: 100%;
-    height: 200dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -226,7 +225,8 @@ textarea:hover {
     flex-direction: column;
     max-width: 720px;
     box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.2);
-    width: calc(100% - 20px);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .card {
@@ -288,11 +288,14 @@ textarea:hover {
 .tab_site {
     padding: 10px 20px;
     transition: 0.3s;
-    border-radius: 99px;
     background-color: rgb(255, 255, 255);
     box-shadow: 0 3px 10px -1px rgba(0, 0, 0, 0.2);
     border-radius: 6px;
-    margin: 10px;
+    margin: 10px;   
+    height: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .tab_site:hover {
@@ -327,8 +330,11 @@ textarea:hover {
     height: 100px;
     background-color: #f9f9f9;
     padding: 20px;
-    width: calc(100% - 20px);
+    width: 100%;
+    height: auto;
     max-width: 720px;
+    display: flex;
+    box-sizing: border-box;
 }
 
 .content_footer_card {
@@ -341,6 +347,8 @@ textarea:hover {
     margin: 10px 15px;
     text-align: center;
     padding: 20px 0;
+    width: 100%;
+    height: 100%;
 }
 
 .content_footer_card_title {

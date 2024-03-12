@@ -38,6 +38,7 @@ function show_select(div, select_css, callback = null) {
             if (callback) { callback() }
         });
     });
+    console.log(elements)
     elements[0].click();
 }
 
@@ -201,7 +202,6 @@ function init_page() {
             })
             sites_group_list[currect_index].style.display = 'flex'
         })
-        ele.click()
     })
 
     // 侧边栏点击跳转
