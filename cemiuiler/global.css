@@ -52,6 +52,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 4em;
+    min-width: 4em;
     height: 100%;
     border-right: 1px solid var(--secondary-color);
     user-select: none;
@@ -166,11 +167,18 @@ body {
     flex: 1;
 }
 
+#container * {
+
+    text-align: start;
+}
+
+
 #setting_div{
     position: fixed;
     width: 75dvw;
     height: 75dvh;
     top: 12.5dvh;
+    top: 112.5dvh;
     left: 12.5dvw;
     background-color: rgba(0,0,0,0.2);
     backdrop-filter: blur(30px);

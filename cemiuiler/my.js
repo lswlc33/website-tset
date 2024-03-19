@@ -48,3 +48,26 @@ setting_bottom.addEventListener('click', function () {
     setting_div.style.top = '112.5dvh';
     setting_div.style.opacity = '0';
 })
+
+
+require.config({ paths: { 'vs': 'https://cdn.staticfile.org/monaco-editor/0.19.3/min/vs' } });
+require(['vs/editor/editor.main'], function () {
+    // 启动
+    init_edit(
+        `期待被作者重构`
+    )
+});
+
+function init_edit(value) {
+    window.monaco.editor.create(
+        // 显示在哪
+        document.getElementById("container"), {
+        // 显示什么
+        value,
+        automaticLayout: true,
+        cursorSmoothCaretAnimation: true,
+        cursorBlinking: 'Solid',
+        roundedSelection: true,
+        autoIndent: 'always',
+    })
+}
