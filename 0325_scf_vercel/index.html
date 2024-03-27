@@ -457,6 +457,7 @@
         // 监控刚刚提交的部署确认结果
         // 部署ID格式为: dpl_xxxxxx
         var sec = 0
+        var status = 0
         const getStatusInterval = setInterval(() => {
             fetch(`https://api.vercel.com/v13/deployments/${id}`,
                 {
@@ -465,8 +466,10 @@
                 }).then(response => {
                     return response.json();
                 }).then(data => {
+                    if (status) { return false }
                     if (data.readyState === "READY") {
                         showToast('错误', '部署成功！')
+                        status = 1
                         recovery()
                         clearInterval(getStatusInterval); xlog("部署成功！")
                         for (let i of data.alias) { xlog(`部署地址： https://${i}`) }
@@ -474,6 +477,7 @@
                         clearInterval(getStatusInterval);
                         showToast('错误', '部署失败！')
                         xlog("部署失败！", 'e')
+                        status = 1
                         recovery()
                         xlog(data.errorCode, 'e')
                         xlog(data.errorMessage, 'e')
