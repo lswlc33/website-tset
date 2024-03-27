@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>部署到 Vercel</title>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js"></script>
+    <link href="https://fonts.googlefonts.cn/css?family=Ubuntu+Mono" rel="stylesheet">
+    <script src="toast.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            display: flex;
+            justify-content: center;
+        }
+
+        body {
+            font-family: 'Ubuntu Mono', Arial;
+            padding: 20px;
+            width: 100%;
+            max-width: 740px;
+        }
+
+        .big_title {
+            font-size: 30px;
+            margin: 20px 0;
+            margin-bottom: 40px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 20px;
+            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-weight: bold
+        }
+
+        .content {
+            padding-left: 30px
+        }
+
+        input[type=text] {
+            outline: none;
+            border: none;
+            border-bottom: 2px solid #000;
+            padding: 0 5px;
+            width: fit-content;
+            font-family: 'Ubuntu Mono', Arial;
+        }
+
+        button {
+            background: blueviolet;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 20px;
+            color: white;
+            font-weight: bolder;
+            border: none;
+            margin-top: 20px;
+            transition: background-color 0.5s
+        }
+
+        .btn_invaild {
+            background: rgb(153, 153, 153);
+        }
+
+        .conslog {
+            margin-top: 50px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            font-weight: bold
+        }
+
+        .hide {
+            display: none;
+        }
+
+        #conslog_title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            font-family: 'Ubuntu Mono', Arial;
+            border: none;
+            background: none;
+            color: black;
+            outline: none;
+            resize: none;
+            font-size: 15px;
+        }
+
+        textarea::-webkit-scrollbar,
+        textarea::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="big_title">部署 Onemanager 到 Vercel</div>
+    <div class="title">1. 下载仓库源码</div>
+    <div class="content">
+        点击这里：<a href="https://github.com/qkqpttgf/OneManager-php"
+            target="_blank">https://github.com/qkqpttgf/OneManager-php</a>
+    </div>
+
+    <div class="title">2. 选择 zip 文件</div>
+    <div class="content">
+        <input type="file" name="" id="nec_file">
+    </div>
+
+    <div class="title">3. 输入已有 token 或者 <a href="https://vercel.com/account/tokens" target="_blank">创建一个新的</a></div>
+    <div class="content">
+        Vercel Token: <input type="text" id="nec_token">
+    </div>
+
+    <div class="title">4. 检查依赖版本</div>
+    <div class="content">
+        <div>查看该项目的 Readme <a href="https://github.com/vercel-community/php"
+                target="_blank">https://github.com/vercel-community/php</a></div>
+        <div>"runtime": "vercel-php@<input type="text" style="width: 50px" id="nec_ver">"</div>
+    </div>
+
+    <div class="title">5. 输入你的项目名称</div>
+    <div class="content">
+        Name: <input type="text" id="nec_name">
+    </div>
+
+    <div class="title">Tips: 你可以覆盖已有的项目</div>
+
+    <button class="sub_btn">提交！</button>
+
+    <div class="conslog hide">
+        <div id="conslog_title">日志</div>
+        <textarea cols="30" rows="10" readonly></textarea>
+    </div>
+</body>
+
+<script>
+    var btn = document.querySelector('.sub_btn')
+    var nec_ver = document.querySelector('#nec_ver')
+    var nec_name = document.querySelector('#nec_name')
+    var nec_file = document.querySelector('#nec_file')
+    var nec_token = document.querySelector('#nec_token')
+    var conslog_ = document.querySelector('.conslog')
+
+
+    function xlog(data, type = 'i') {
+        let time = new Date().toLocaleTimeString()
+        let conslog = document.querySelector('.conslog textarea')
+        if (type === 'e') {
+            conslog.value += `[error] ${time} ${data}\n`
+            console.log(`\u001b[31m[error]\u001b[0m ${time} ${data}`)
+        } else if (type === 'w') {
+            conslog.value += `[warn] ${time} ${data}\n`
+            console.log(`\u001b[33m[warn]\u001b[0m ${time} ${data}`)
+        } else if (type === 'i') {
+            conslog.value += `[info] ${time} ${data}\n`
+            console.log(`\u001b[35m[info]\u001b[0m ${time} ${data}`)
+        }
+    }
+
+
+    function data_check() {
+        // 检查数据是否空
+        let input = document.querySelectorAll('input')
+        for (let i of input) { if (!i.value) { return false } }
+        return true
+    }
+
+
+    // 提交按钮点击事件
+    btn.addEventListener('click', () => {
+        if (btn.classList.contains('btn_invaild')) {
+            xlog('您已提交，请勿重复提交！', 'w')
+            return
+        }
+        if (!data_check()) {
+            xlog('请填写所有数据！', 'w')
+            showToast('错误', '请填写所有数据！')
+            return
+        }
+        btn.classList.add('btn_invaild')
+        btn.innerHTML = '已提交，开始部署...'
+        showToast('开始部署', '请坐和放宽！')
+        xlog('开始部署...', 'i')
+        conslog_.classList.remove('hide')
+        conslog_.scrollIntoView({ behavior: 'smooth' });
+        deploy_pre()
+    })
+
+    // 设置默认值
+    nec_ver.value = '0.7.0'
+    nec_name.value = 'text'
+
+
+    function deploy_pre() {
+        let filedata = nec_file.files[0]
+
+
+        xlog('▶ 开始检查压缩包', 'i')
+        var new_zip = new JSZip()
+        new_zip.loadAsync(filedata).then(zip => {
+            xlog('压缩包加载完成！', 'i')
+            let dirpath = findPath(zip)
+            getFileContent(new_zip, dirpath).then(fdata => {
+                checkDeploys(nec_name.value).then(data => {
+                    if (data) { deploy_start(nec_name.value, fdata) }
+                })
+            }).catch(e => {
+                xlog('压缩包加载失败！', 'e')
+                showToast('错误', '压缩包加载失败！')
+            })
+        })
+    }
+
+    function getFileContent(zip, dirpath) {
+        return new Promise((resolve, reject) => {
+            xlog("▶ 开始预处理文件！");
+            var filedata = new Array();
+            var verceljson = {
+                "functions": {
+                    "api/index.php": {
+                        "runtime": "vercel-php@" + nec_ver.value
+                    }
+                },
+                "routes": [
+                    {
+                        "src": "/(.*)",
+                        "dest": "/api/index.php"
+                    }
+                ]
+            };
+            var tmp = {
+                "file": "vercel.json",
+                "data": JSON.stringify(verceljson, null, "\t")
+            }
+            filedata.push(tmp);
+            var loadedNum = 0;
+            var loadingNum = 0;
+            for (filename in zip.files) {
+                if (filename.substr(0, dirpath.length) === dirpath) {
+                    readFiles(filename);
+                }
+            }
+            function readFiles(filename) {
+                var tmpfilename = "api/" + filename.substr(dirpath.length);
+                var file = zip.file(filename);
+                if (file !== null) {
+                    loadingNum++;
+                    file.async("string").then(content => {
+                        var tmp = {
+                            "file": tmpfilename,
+                            "data": content
+                        }
+                        filedata.push(tmp);
+                        loadedNum++;
+                    });
+                }
+            }
+
+            var uploadList = setInterval(() => {
+                if (loadingNum == 0 || loadedNum < loadingNum) {
+                    xlog(loadedNum + " / " + loadingNum);
+                } else {
+                    clearInterval(uploadList);
+
+                    xlog("文件预处理完毕！");
+                    resolve(filedata);
+                }
+            }, 1000);
+        });
+    }
+
+    function findPath(zip) {
+        var haveIndex = 0
+        var dirpath = ""
+
+        for (filename in zip.files) {
+            if (filename.substr(filename.lastIndexOf("/") + 1) === "index.php") {
+                dirpath = filename.substr(0, filename.length - 9)
+                xlog('压缩包验证完成！', 'i')
+                return dirpath
+            }
+        }
+        showToast('错误', '压缩包验证失败！')
+        xlog('压缩包验证失败！', 'e')
+        return false
+    }
+
+    function checkDeploys(name) {
+        xlog("▶ 开始检查项目信息！");
+
+        return fetch(`https://api.vercel.com/v8/projects/${name}`, {
+            method: 'GET',
+            headers: { "Authorization": `Bearer ${nec_token.value}` }
+        }).then(response => {
+            if (response.status === 404) {
+                xlog("该名称未曾使用");
+                return true;
+            }
+            return response.json();
+        }).then(data => {
+            if (data === true) {
+                return true;
+            }
+            xlog("该名称已被使用", 'w');
+
+            return fetch(`https://api.vercel.com/v6/deployments/?projectId=${data.id}`, {
+                method: 'GET',
+                headers: { "Authorization": `Bearer ${nec_token.value}` }
+            }).then(response => response.json());
+        }).then(data => {
+            if (data === true) {
+                return true;
+            }
+
+            const deploys = data.deployments;
+            for (let element of deploys) {
+                if (element.state === "BUILDING") {
+                    showToast('错误', '该项目正在部署，请稍后！')
+                    xlog('该项目正在部署，请稍后！', 'e');
+                    return false;
+                }
+            }
+            xlog('该项目未在部署中');
+            return true;
+        }).then(data => {
+            if (data) {
+                xlog('项目信息检查完毕！');
+                return true;
+            }
+        }).catch(e => {
+            xlog(e);
+        })
+    }
+
+    function deploy_start(name, filedata) {
+        // 向 Vercel 提交部署
+        // 参数：项目名称，文件数据
+        xlog("▶ 开始提交部署！");
+        fetch("https://api.vercel.com/v13/deployments", {
+            "method": "post",
+            "headers": {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${nec_token.value}`
+            },
+            "body": JSON.stringify({
+                "name": nec_name.value,
+                //"project": appId,
+                "target": "production",
+                "functions": {
+                    "api/index.php": { "runtime": `vercel-php@${nec_ver.value}` }
+                },
+                "routes": [{
+                    "src": "/(.*)",
+                    "dest": "/api/index.php"
+                }],
+                "projectSettings": { "framework": null },
+                "files": filedata
+            })
+        }).then(response => {
+            return response.json()
+        }).then(data => {
+            getStatus(data.id);
+        }).catch(error => {
+            xlog(error, 'e');
+        });
+    }
+
+    function getStatus(id) {
+        // 监控刚刚提交的部署确认结果
+        // 部署ID格式为: dpl_xxxxxx
+        var sec = 0
+        const getStatusInterval = setInterval(() => {
+            fetch(`https://api.vercel.com/v13/deployments/${id}`,
+                {
+                    headers: { "Authorization": `Bearer ${nec_token.value}` },
+                    method: "GET",
+                }).then(response => {
+                    return response.json();
+                }).then(data => {
+                    if (data.readyState === "READY") {
+                        showToast('错误', '部署成功！')
+                        clearInterval(getStatusInterval); xlog("部署成功！")
+                        for (let i of data.alias) { xlog(`部署地址： https://${i}`) }
+                    } else if (data.readyState === "ERROR") {
+                        clearInterval(getStatusInterval);
+                        showToast('错误', '部署失败！')
+                        xlog("部署失败！", 'e')
+                        xlog(data.errorCode, 'e')
+                        xlog(data.errorMessage, 'e')
+                    } else if (data.readyState === "BUILDING") {
+                        if (!(++sec % 3)) { xlog(`正在部署中... ${sec}s`) }
+                    } else if (readyState === "QUEUED") {
+                        xlog("部署队列中...")
+                    }
+                }).catch(error => {
+                    xlog(error, 'e');
+                });
+        }, 1000);
+    }
+
+
+
+</script>
+
+</html>

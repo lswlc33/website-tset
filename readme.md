@@ -50,3 +50,6 @@
 
 13. https://lswlc33.github.io/website-tset/0309_Navigation  
    一个基于单文件配置文件的纯静态导航
+
+14. https://lswlc33.github.io/website-tset/0325_scf_vercel
+   deploy 到 vercel
