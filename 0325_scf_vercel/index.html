@@ -178,6 +178,10 @@
         conslog.scrollTop = conslog.scrollHeight
     }
 
+    function recovery() {
+        btn.classList.remove('btn_invaild')
+        btn.innerHTML = '提交！'
+    }
 
     function data_check() {
         // 检查数据是否空
@@ -224,6 +228,7 @@
             var new_zip = new JSZip()
         } catch (error) {
             xlog('JSZip 加载失败！', 'e')
+            recovery()
         }
 
         new_zip.loadAsync(filedata).then(zip => {
@@ -237,10 +242,12 @@
             }).catch(e => {
                 xlog('压缩包加载失败！', 'e')
                 showToast('错误', '压缩包加载失败！')
+                recovery()
             })
         }).catch(e => {
             xlog('压缩包加载失败！', 'e')
             showToast('错误', '压缩包加载失败！')
+            recovery()
         })
     }
 
@@ -314,6 +321,7 @@
         }
         showToast('错误', '压缩包验证失败！')
         xlog('压缩包验证失败！', 'e')
+        recovery()
         return false
     }
 
@@ -349,6 +357,7 @@
                 if (element.state === "BUILDING") {
                     showToast('错误', '该项目正在部署，请稍后！')
                     xlog('该项目正在部署，请稍后！', 'e');
+                    recovery()
                     return false;
                 }
             }
@@ -394,6 +403,7 @@
             getStatus(data.id);
         }).catch(error => {
             xlog(error, 'e');
+            recovery()
         });
     }
 
@@ -411,12 +421,14 @@
                 }).then(data => {
                     if (data.readyState === "READY") {
                         showToast('错误', '部署成功！')
+                        recovery()
                         clearInterval(getStatusInterval); xlog("部署成功！")
                         for (let i of data.alias) { xlog(`部署地址： https://${i}`) }
                     } else if (data.readyState === "ERROR") {
                         clearInterval(getStatusInterval);
                         showToast('错误', '部署失败！')
                         xlog("部署失败！", 'e')
+                        recovery()
                         xlog(data.errorCode, 'e')
                         xlog(data.errorMessage, 'e')
                     } else if (data.readyState === "BUILDING") {
@@ -426,6 +438,7 @@
                     }
                 }).catch(error => {
                     xlog(error, 'e');
+                    recovery()
                 });
         }, 1000);
     }
