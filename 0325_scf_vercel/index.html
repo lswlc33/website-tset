@@ -169,6 +169,7 @@
             conslog.value += `[info] ${time} ${data}\n`
             console.log(`\u001b[35m[info]\u001b[0m ${time} ${data}`)
         }
+        conslog.scrollTop = conslog.scrollHeight
     }
 
 
@@ -196,7 +197,10 @@
         showToast('开始部署', '请坐和放宽！')
         xlog('开始部署...', 'i')
         conslog_.classList.remove('hide')
-        conslog_.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+            conslog_.scrollIntoView({ behavior: 'smooth' });
+        }, 1000);
+
         deploy_pre()
     })
 
