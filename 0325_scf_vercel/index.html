@@ -24,13 +24,13 @@
             padding: 20px;
             width: 100%;
             max-width: 740px;
-            box-sizing:border-box;
+            box-sizing: border-box;
         }
 
-        a{
+        a {
             word-wrap: break-word;
         }
-    
+
         .big_title {
             font-size: 30px;
             margin: 20px 0;
@@ -52,7 +52,8 @@
             padding-left: 30px
         }
 
-        input[type=text],input[type=password] {
+        input[type=text],
+        input[type=password] {
             outline: none;
             border: none;
             border-bottom: 2px solid #000;
@@ -219,7 +220,12 @@
 
 
         xlog('▶ 开始检查压缩包', 'i')
-        var new_zip = new JSZip()
+        try {
+            var new_zip = new JSZip()
+        } catch (error) {
+            xlog('JSZip 加载失败！', 'e')
+        }
+
         new_zip.loadAsync(filedata).then(zip => {
             xlog('压缩包加载完成！', 'i')
             let dirpath = findPath(zip)
@@ -231,6 +237,9 @@
                 xlog('压缩包加载失败！', 'e')
                 showToast('错误', '压缩包加载失败！')
             })
+        }).catch(e => {
+            xlog('压缩包加载失败！', 'e')
+            showToast('错误', '压缩包加载失败！')
         })
     }
 
