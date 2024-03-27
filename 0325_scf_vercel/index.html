@@ -186,7 +186,21 @@
     function data_check() {
         // 检查数据是否空
         let input = document.querySelectorAll('input')
-        for (let i of input) { if (!i.value) { return false } }
+
+        for (let i of input) {
+            if (!i.value) {
+                xlog('请填写所有数据！', 'w')
+                showToast('错误', '请填写所有数据！')
+                return false
+            }
+        }
+
+        if (!/^[a-zA-Z0-9\.\-_]+$/.test(nec_name.value)) {
+            xlog('名称输入不规范！（大小写字母数字下划线）', 'w')
+            showToast('错误', '名称输入不规范！')
+            return false
+        }
+
         return true
     }
 
@@ -197,11 +211,7 @@
             xlog('您已提交，请勿重复提交！', 'w')
             return
         }
-        if (!data_check()) {
-            xlog('请填写所有数据！', 'w')
-            showToast('错误', '请填写所有数据！')
-            return
-        }
+        if (!data_check()) { return }
         btn.classList.add('btn_invaild')
         btn.innerHTML = '已提交，开始部署...'
         showToast('开始部署', '请坐和放宽！')
