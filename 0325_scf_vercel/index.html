@@ -229,6 +229,7 @@
         new_zip.loadAsync(filedata).then(zip => {
             xlog('压缩包加载完成！', 'i')
             let dirpath = findPath(zip)
+            if (!dirpath) { return }
             getFileContent(new_zip, dirpath).then(fdata => {
                 checkDeploys(nec_name.value).then(data => {
                     if (data) { deploy_start(nec_name.value, fdata) }
@@ -293,7 +294,6 @@
                     xlog(loadedNum + " / " + loadingNum);
                 } else {
                     clearInterval(uploadList);
-
                     xlog("文件预处理完毕！");
                     resolve(filedata);
                 }
