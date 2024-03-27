@@ -110,6 +110,15 @@
         textarea::-webkit-scrollbar-track {
             background-color: transparent;
         }
+
+        #token_text {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 5px 10px;
+            border-radius: 10px;
+            display: inline-block;
+            cursor: pointer;
+            margin-top: 15px;
+        }
     </style>
 </head>
 
@@ -128,7 +137,8 @@
 
     <div class="title">3. 输入已有 token 或者 <a href="https://vercel.com/account/tokens" target="_blank">创建一个新的</a></div>
     <div class="content">
-        Vercel Token: <input type="password" id="nec_token">
+        Vercel Token: <input type="password" id="nec_token"><br>
+        <div id="token_text">验证 Token</div>
     </div>
 
     <div class="title">4. 检查依赖版本</div>
@@ -160,7 +170,15 @@
     var nec_file = document.querySelector('#nec_file')
     var nec_token = document.querySelector('#nec_token')
     var conslog_ = document.querySelector('.conslog')
+    var token_text = document.querySelector('#token_text')
 
+    token_text.addEventListener('click', () => {
+        if (token_text.innerHTML === '验证 Token' || token_text.innerHTML === '验证失败，请点击重试！') {
+            token_text.innerHTML = '正在验证...';
+            verify();
+        }
+
+    })
 
     function xlog(data, type = 'i') {
         let time = new Date().toLocaleTimeString()
@@ -189,14 +207,14 @@
 
         for (let i of input) {
             if (!i.value) {
-                xlog('请填写所有数据！', 'w')
+                xlog('请填写所有数据！', 'e')
                 showToast('错误', '请填写所有数据！')
                 return false
             }
         }
 
         if (!/^[a-zA-Z0-9\.\-_]+$/.test(nec_name.value)) {
-            xlog('名称输入不规范！（大小写字母数字下划线）', 'w')
+            xlog('名称输入不规范！（大小写字母数字下划线）', 'e')
             showToast('错误', '名称输入不规范！')
             return false
         }
@@ -417,6 +435,21 @@
         }).catch(error => {
             xlog(error, 'e');
             recovery()
+        });
+    }
+
+    function verify() {
+        fetch("https://api.vercel.com/v2/user", {
+            "headers": {
+                "Authorization": `Bearer ${nec_token.value}`
+            },
+            "method": "get"
+        }).then(response => {
+            return response.json();
+        }).then(data => {
+            token_text.innerHTML = `你好！${data.user.name} ${data.user.username}`
+        }).catch(error => {
+            token_text.innerHTML = `验证失败，请点击重试！`
         });
     }
 
