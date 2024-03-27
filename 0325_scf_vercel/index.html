@@ -336,11 +336,15 @@
                 xlog("该名称未曾使用");
                 return true;
             }
+            if (response.status === 403) {
+                xlog('Token 可能是错误的', 'e');
+                recovery()
+                return false;
+            }
             return response.json();
         }).then(data => {
-            if (data === true) {
-                return true;
-            }
+            if (data === true) { return true }
+            if (data === false) { return false }
             xlog("该名称已被使用", 'w');
 
             return fetch(`https://api.vercel.com/v6/deployments/?projectId=${data.id}`, {
@@ -348,9 +352,8 @@
                 headers: { "Authorization": `Bearer ${nec_token.value}` }
             }).then(response => response.json());
         }).then(data => {
-            if (data === true) {
-                return true;
-            }
+            if (data === true) { return true }
+            if (data === false) { return false }
 
             const deploys = data.deployments;
             for (let element of deploys) {
