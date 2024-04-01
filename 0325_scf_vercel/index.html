@@ -7,7 +7,7 @@
     <title>部署到 Vercel</title>
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.7.1/dist/jszip.min.js"></script>
     <link href="https://fonts.googlefonts.cn/css?family=Ubuntu+Mono" rel="stylesheet">
-    <script src="toast.js"></script>
+    <script src="js/toast.js"></script>
     <style>
         * {
             padding: 0;
@@ -119,6 +119,44 @@
             cursor: pointer;
             margin-top: 15px;
         }
+
+        .file_type_tabs {
+            display: flex;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            width: max-content;
+            margin-bottom: 10px;
+        }
+
+        .file_type_tab {
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: 0.5s;
+        }
+
+        .file_type_tab_active {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #FFF;
+        }
+
+        .file_con {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 5px 10px;
+            border-radius: 10px;
+            display: inline-block;
+            cursor: pointer;
+            margin-top: 15px;
+            position: relative;
+        }
+
+        input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
     </style>
 </head>
 
@@ -127,13 +165,32 @@
     <div class="title">1. 下载仓库源码</div>
     <div class="content">
         点击这里：<a href="https://github.com/qkqpttgf/OneManager-php"
-            target="_blank">https://github.com/qkqpttgf/OneManager-php</a>
+            target="_blank">github.com/qkqpttgf/OneManager-php</a><br>
+        或者直接下载：<a href="    https://github.com/qkqpttgf/OneManager-php/archive/refs/heads/master.zip"
+            target="_blank">master.zip</a>
     </div>
 
-    <div class="title">2. 选择 zip 文件</div>
+    <div class="title">2. 上传文件</div>
     <div class="content">
-        <input type="file" name="" id="nec_file">
+        <div class="file_type_tabs">
+            <div class="file_type_tab file_type_tab_active" id="radio_1">
+                压缩包
+            </div>
+            <div class="file_type_tab" id="radio_2">
+                文件夹
+            </div>
+        </div>
+
+
+        <div>
+            <div class="file_con">
+                <input type="file" name="" id="nec_file">
+                <div class="file_con_text">选择压缩包</div>
+            </div>
+
+        </div>
     </div>
+
 
     <div class="title">3. 输入已有 token 或者 <a href="https://vercel.com/account/tokens" target="_blank">创建一个新的</a></div>
     <div class="content">
@@ -168,9 +225,50 @@
     var nec_ver = document.querySelector('#nec_ver')
     var nec_name = document.querySelector('#nec_name')
     var nec_file = document.querySelector('#nec_file')
+    var nec_file_text = document.querySelector('.file_con_text')
+    var nec_file_type = 0
     var nec_token = document.querySelector('#nec_token')
-    var conslog_ = document.querySelector('.conslog')
     var token_text = document.querySelector('#token_text')
+    var conslog_ = document.querySelector('.conslog')
+    var radio_1 = document.querySelector('#radio_1')
+    var radio_2 = document.querySelector('#radio_2')
+
+    var file_type_tabs = document.querySelectorAll('.file_type_tab')
+    for (let tab of file_type_tabs) {
+        tab.addEventListener('click', () => {
+            for (let tab of file_type_tabs) {
+                if (tab.classList.contains('file_type_tab_active')) {
+                    tab.classList.remove('file_type_tab_active')
+                }
+            }
+            tab.classList.add('file_type_tab_active')
+            if (radio_1.classList.contains('file_type_tab_active')) {
+                nec_file_type = 1
+                nec_file.removeAttribute('webkitdirectory')
+                nec_file.removeAttribute('multiple')
+                nec_file.setAttribute('accept', 'application/zip')
+                nec_file_text.innerHTML = '选择压缩包'
+            } else {
+                nec_file_type = 0
+                nec_file.setAttribute('webkitdirectory', true)
+                nec_file.setAttribute('multiple', true)
+                nec_file.removeAttribute('accept')
+                nec_file_text.innerHTML = '选择文件夹'
+            }
+        })
+    }
+
+    nec_file.addEventListener('change', () => {
+        if (nec_file.files.length === 0) {
+            nec_file_text.innerHTML = '选择压缩包'
+        } else if (nec_file.files.length === 1) {
+            nec_file_text.innerHTML = nec_file.files[0].name
+        } else {
+            nec_file_text.innerHTML = `${nec_file.files[0].name} 等 ${nec_file.files.length} 个文件`
+        }
+    })
+
+    radio_1.click()
 
     token_text.addEventListener('click', () => {
         if (token_text.innerHTML === '验证 Token' || token_text.innerHTML === '验证失败，请点击重试！') {
@@ -184,14 +282,14 @@
         let time = new Date().toLocaleTimeString()
         let conslog = document.querySelector('.conslog textarea')
         if (type === 'e') {
-            conslog.value += `[error] ${time} ${data}\n`
-            console.log(`\u001b[31m[error]\u001b[0m ${time} ${data}`)
+            conslog.value += `[error] ${time} ${data} \n`
+            console.log(`\u001b[31m[error]\u001b[0m ${time} ${data} `)
         } else if (type === 'w') {
-            conslog.value += `[warn] ${time} ${data}\n`
-            console.log(`\u001b[33m[warn]\u001b[0m ${time} ${data}`)
+            conslog.value += `[warn] ${time} ${data} \n`
+            console.log(`\u001b[33m[warn]\u001b[0m ${time} ${data} `)
         } else if (type === 'i') {
-            conslog.value += `[info] ${time} ${data}\n`
-            console.log(`\u001b[35m[info]\u001b[0m ${time} ${data}`)
+            conslog.value += `[info] ${time} ${data} \n`
+            console.log(`\u001b[35m[info]\u001b[0m ${time} ${data} `)
         }
         conslog.scrollTop = conslog.scrollHeight
     }
