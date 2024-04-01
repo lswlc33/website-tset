@@ -58,7 +58,7 @@
             border: none;
             border-bottom: 2px solid #000;
             padding: 0 5px;
-            width: fit-content;
+            width: max-content;
             font-family: 'Ubuntu Mono', Arial;
         }
 
@@ -80,6 +80,7 @@
 
         .conslog {
             margin-top: 50px;
+            margin-bottom: 100px;
             background: rgba(0, 0, 0, 0.2);
             border-radius: 20px;
             padding: 20px;
@@ -145,7 +146,6 @@
             border-radius: 10px;
             display: inline-block;
             cursor: pointer;
-            margin-top: 15px;
             position: relative;
         }
 
@@ -172,16 +172,6 @@
 
     <div class="title">2. 上传文件</div>
     <div class="content">
-        <div class="file_type_tabs">
-            <div class="file_type_tab file_type_tab_active" id="radio_1">
-                压缩包
-            </div>
-            <div class="file_type_tab" id="radio_2">
-                文件夹
-            </div>
-        </div>
-
-
         <div>
             <div class="file_con">
                 <input type="file" name="" id="nec_file">
@@ -200,9 +190,10 @@
 
     <div class="title">4. 检查依赖版本</div>
     <div class="content">
-        <div>查看该项目的 Readme <a href="https://github.com/vercel-community/php"
-                target="_blank">https://github.com/vercel-community/php</a></div>
-        <div>"runtime": "vercel-php@<input type="text" style="width: 50px" id="nec_ver">"</div>
+        <div>如没有自动出现请查看<a href="https://github.com/vercel-community/php/blob/master/package.json"
+                target="_blank">此链接</a>填入对应值</div>
+        <div>(vercel-php)version :<input type="text" style="width: 50px" id="nec_ver">"</div>
+        <div>@types/node :<input type="text" style="width: 50px" id="nec_ver_node">"</div>
     </div>
 
     <div class="title">5. 输入你的项目名称</div>
@@ -223,59 +214,27 @@
 <script>
     var btn = document.querySelector('.sub_btn')
     var nec_ver = document.querySelector('#nec_ver')
+    var nec_ver_node = document.querySelector('#nec_ver_node')
     var nec_name = document.querySelector('#nec_name')
     var nec_file = document.querySelector('#nec_file')
     var nec_file_text = document.querySelector('.file_con_text')
-    var nec_file_type = 0
     var nec_token = document.querySelector('#nec_token')
     var token_text = document.querySelector('#token_text')
     var conslog_ = document.querySelector('.conslog')
-    var radio_1 = document.querySelector('#radio_1')
-    var radio_2 = document.querySelector('#radio_2')
-
-    var file_type_tabs = document.querySelectorAll('.file_type_tab')
-    for (let tab of file_type_tabs) {
-        tab.addEventListener('click', () => {
-            for (let tab of file_type_tabs) {
-                if (tab.classList.contains('file_type_tab_active')) {
-                    tab.classList.remove('file_type_tab_active')
-                }
-            }
-            tab.classList.add('file_type_tab_active')
-            if (radio_1.classList.contains('file_type_tab_active')) {
-                nec_file_type = 1
-                nec_file.removeAttribute('webkitdirectory')
-                nec_file.removeAttribute('multiple')
-                nec_file.setAttribute('accept', 'application/zip')
-                nec_file_text.innerHTML = '选择压缩包'
-            } else {
-                nec_file_type = 0
-                nec_file.setAttribute('webkitdirectory', true)
-                nec_file.setAttribute('multiple', true)
-                nec_file.removeAttribute('accept')
-                nec_file_text.innerHTML = '选择文件夹'
-            }
-        })
-    }
 
     nec_file.addEventListener('change', () => {
         if (nec_file.files.length === 0) {
             nec_file_text.innerHTML = '选择压缩包'
         } else if (nec_file.files.length === 1) {
-            nec_file_text.innerHTML = nec_file.files[0].name
-        } else {
-            nec_file_text.innerHTML = `${nec_file.files[0].name} 等 ${nec_file.files.length} 个文件`
+            nec_file_text.innerHTML = `选择了 ${nec_file.files[0].name}`
         }
     })
-
-    radio_1.click()
 
     token_text.addEventListener('click', () => {
         if (token_text.innerHTML === '验证 Token' || token_text.innerHTML === '验证失败，请点击重试！') {
             token_text.innerHTML = '正在验证...';
             verify();
         }
-
     })
 
     function xlog(data, type = 'i') {
@@ -341,9 +300,17 @@
     })
 
     // 设置默认值
-    nec_ver.value = '0.7.0'
-    nec_name.value = 'text'
-
+    nec_name.value = 'onemamager'
+    fetch("https://raw.githubusercontent.com/vercel-community/php/master/package.json", {
+        method: "GET"
+    }).then(
+        res => res.json()
+    ).then(data => {
+        nec_ver.value = data.version
+        nec_ver_node.value = data.devDependencies["@types/node"]
+    }).catch(err => {
+        console.log(err);
+    });
 
     function deploy_pre() {
         let filedata = nec_file.files[0]
@@ -590,9 +557,6 @@
                 });
         }, 1000);
     }
-
-
-
 </script>
 
 </html>

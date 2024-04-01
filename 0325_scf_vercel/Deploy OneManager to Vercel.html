@@ -1,6 +1,8 @@
-
 <!-- saved from url=(0048)https://scfonedrive.github.io/Vercel/Deploy.html -->
-<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en-us">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Deploy OneManager to Vercel</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script src="./Deploy OneManager to Vercel_files/jszip.min.js.下载"></script>
@@ -10,17 +12,23 @@
     <h1>Deploy to Vercel</h1>
 
     <h4>1. Download the latest code (zip file), not the Releases</h4>
-    From <a href="https://github.com/qkqpttgf/OneManager-php/archive/refs/heads/master.zip" target="_blank">https://github.com/qkqpttgf/OneManager-php</a>
+    From <a href="https://github.com/qkqpttgf/OneManager-php/archive/refs/heads/master.zip"
+        target="_blank">https://github.com/qkqpttgf/OneManager-php</a>
 
-    <h4>2. Use an existed Vercel token or Click <a href="https://vercel.com/account/tokens" target="_blank">here</a> to Creat a new token</h4>
-    <label>And input Token: <input id="VercelToken" name="VercelToken" type="password" placeholder="" value="" oninput="clearCheckToken(this);"></label>
+    <h4>2. Use an existed Vercel token or Click <a href="https://vercel.com/account/tokens" target="_blank">here</a> to
+        Creat a new token</h4>
+    <label>And input Token: <input id="VercelToken" name="VercelToken" type="password" placeholder="" value=""
+            oninput="clearCheckToken(this);"></label>
     <input id="VercelTokenCheckResult" name="VercelTokenCheckResult" type="hidden" value="false">
-    <input id="VercelTokenCheckButton" name="VercelTokenCheckButton" type="button" value="Check" onclick="checkToken(); return false;" style="display: none;">
+    <input id="VercelTokenCheckButton" name="VercelTokenCheckButton" type="button" value="Check"
+        onclick="checkToken(); return false;" style="display: none;">
     <span id="VercelTokenCheckResultUser"></span>
 
     <h4>3. Choose deploy a zip file or folder</h4>
-    <label><input type="radio" name="deployWithFileFolder" value="File" onclick="deployWithFileorFolder(this);" checked="">zip file</label>
-    <label><input type="radio" name="deployWithFileFolder" value="Folder" onclick="deployWithFileorFolder(this);">folder</label>
+    <label><input type="radio" name="deployWithFileFolder" value="File" onclick="deployWithFileorFolder(this);"
+            checked="">zip file</label>
+    <label><input type="radio" name="deployWithFileFolder" value="Folder"
+            onclick="deployWithFileorFolder(this);">folder</label>
 
     <span id="deployWithFile" style="display: none;">
         <h4>4. Choose the zip file:</h4>
@@ -32,15 +40,20 @@
     </span>
 
     <h4>5. Fetch vercel-php version</h4>
-    In the Readme of <a href="https://github.com/vercel-community/php" target="_blank">https://github.com/vercel-community/php</a><br>
+    In the Readme of <a href="https://github.com/vercel-community/php"
+        target="_blank">https://github.com/vercel-community/php</a><br>
     <span>
-        "runtime": "vercel-php@<input id="vercelPHPVersion" name="vercelPHPVersion" type="text" style="width: 50;" value="" placeholder="0.7.0" oninput="this.parentNode.style.background = &#39;&#39;;">"
-        (Node version: <input id="vercelNodeVersion" name="vercelNodeVersion" type="text" style="width: 80;" value="" placeholder="20.x or 18" oninput="this.parentNode.style.background = &#39;&#39;;">)
+        "runtime": "vercel-php@<input id="vercelPHPVersion" name="vercelPHPVersion" type="text" style="width: 50;"
+            value="" placeholder="0.7.0" oninput="this.parentNode.style.background = &#39;&#39;;">"
+        (Node version: <input id="vercelNodeVersion" name="vercelNodeVersion" type="text" style="width: 80;" value=""
+            placeholder="20.x or 18" oninput="this.parentNode.style.background = &#39;&#39;;">)
     </span><br>
     <span id="autoVercelPHPVersion"></span>
 
     <h4>6. Input a name for your project: </h4>
-    <label>Project Name: <input id="projectname" name="projectname" type="text" placeholder="lower case alphanumeric characters and hyphens" size="" value="onemanager" oninput="this.parentNode.style.background = &#39;&#39;;"></label>
+    <label>Project Name: <input id="projectname" name="projectname" type="text"
+            placeholder="lower case alphanumeric characters and hyphens" size="" value="onemanager"
+            oninput="this.parentNode.style.background = &#39;&#39;;"></label>
     <br>
     You can overlay an existed project.<br>
     (You will lost your config, please export the config before overlay.)
@@ -652,37 +665,40 @@
 
 
 
-</body><div class="xl-chrome-ext-footer" id="xl-chrome-ext-footer">
-                <div class="xl-chrome-ext-footer__ball animate__bounceOutUp">
-                  <div class="xl-chrome-ext-footer__logo"></div>
-                  <div class="xl-chrome-ext-footer__quantity">1</div>
+</body>
+<div class="xl-chrome-ext-footer" id="xl-chrome-ext-footer">
+    <div class="xl-chrome-ext-footer__ball animate__bounceOutUp">
+        <div class="xl-chrome-ext-footer__logo"></div>
+        <div class="xl-chrome-ext-footer__quantity">1</div>
+    </div>
+    <div class="xl-chrome-ext-footer__bar xl-chrome-ext-footer__bar--hidden">
+        <div class="xl-chrome-ext-footer__content">
+            <p class="xl-chrome-ext-footer__text">检测到页面存在1个资源</p>
+            <div class="xl-chrome-ext-footer__action">
+                <div class="xl-chrome-ext-footer__url download">
+                    <div class="xl-chrome-ext-footer__action-name">下载</div>
                 </div>
-                <div class="xl-chrome-ext-footer__bar xl-chrome-ext-footer__bar--hidden">
-                  <div class="xl-chrome-ext-footer__content">
-                    <p class="xl-chrome-ext-footer__text">检测到页面存在1个资源</p>
-                    <div class="xl-chrome-ext-footer__action">
-                      <div class="xl-chrome-ext-footer__url download">
-                        <div class="xl-chrome-ext-footer__action-name">下载</div>
-                      </div>
-                      <div class="xl-chrome-ext-footer__url cloudAdd">
-                        <div class="xl-chrome-ext-footer__action-name">
-                          <div class="xl-chrome-ext-footer__button-icon save"></div>
-                          <span class="xl-chrome-ext-footer__button-text">
+                <div class="xl-chrome-ext-footer__url cloudAdd">
+                    <div class="xl-chrome-ext-footer__action-name">
+                        <div class="xl-chrome-ext-footer__button-icon save"></div>
+                        <span class="xl-chrome-ext-footer__button-text">
                             存云盘
-                          </span>
-                        </div>
-                      </div>
+                        </span>
                     </div>
-                    <div class="xl-chrome-ext-footer__agreement">
-                      <span>启用插件访问在线视频时，插件将在播放窗口展示对播放链接的快捷功能</span>
-                      <span class="xl-chrome-ext-footer__know">我知道了</span>
-                    </div>
-                    <div class="xl-chrome-ext-footer__close-wrapper">
-                      <div class="xl-chrome-ext-tips">
-                        <div class="xl-chrome-ext-footer__close"></div>
-                        <div class="xl-chrome-ext-title xl-chrome-ext-title--footer">本次关闭</div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-                </div></html>
+            </div>
+            <div class="xl-chrome-ext-footer__agreement">
+                <span>启用插件访问在线视频时，插件将在播放窗口展示对播放链接的快捷功能</span>
+                <span class="xl-chrome-ext-footer__know">我知道了</span>
+            </div>
+            <div class="xl-chrome-ext-footer__close-wrapper">
+                <div class="xl-chrome-ext-tips">
+                    <div class="xl-chrome-ext-footer__close"></div>
+                    <div class="xl-chrome-ext-title xl-chrome-ext-title--footer">本次关闭</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>
