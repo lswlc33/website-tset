@@ -1,9 +1,9 @@
 // 网站信息设置
-const website_name = "雪月导航";
+const website_name = "网址导航";
 const website_logo_img = "./img/fashion.svg";
 const website_description = "这是一个网站导航站点！";
 const website_footer = "<br> 雪中明月 all rights reserved.";
-const search_box_placeholder = "杂鱼，有本事往这扣字啊~";
+const search_box_placeholder = "请在此输入搜索 文字~";
 
 // 搜索引擎预设
 var search_index_url = [
@@ -11,6 +11,11 @@ var search_index_url = [
     ['Google', 'https://www.google.com/search?q='],
     ['Baidu', 'https://www.baidu.com/s?wd='],
 ]
+
+// 网站公告
+const website_notice_show = true;
+const website_notice_title = "这是公告标题";
+const website_notice_text = "这个每次打开网站都会展示的公告内容，需要手动关闭后才能继续操作";
 
 // 网站与侧边栏是否显示图标
 const show_icon = true;

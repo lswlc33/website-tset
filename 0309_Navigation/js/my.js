@@ -1,3 +1,12 @@
+// 通知收起
+closeNotice = () => {
+    document.querySelector('.notice_card_bg').style.opacity = 0
+    setTimeout(() => {
+        document.querySelector('.notice_card_bg').style.display = 'none'
+    }, 1000)
+}
+
+
 // 顶栏显示与隐藏
 window.addEventListener('scroll', () => {
     let header = document.querySelector('#header');
@@ -169,6 +178,14 @@ function createSidebarItems(data) {
 
 // 初始化
 function init_page() {
+    // 公告展示
+    if (website_notice_show) {
+        document.querySelector('.notice_card_bg').style.display = 'block';
+        setTimeout(() => {
+            document.querySelector('.notice_card_bg').style.opacity = 1;
+        }, 100)
+
+    }
     // 侧边栏大类展开与收起
     if (sidebar_item_can_expand) {
         document.querySelectorAll('.sidebar_item').forEach((element) => {
@@ -239,7 +256,10 @@ set_config('.content_footer_card_co',
 set_config('.search_box', search_box_placeholder)
 set_config('#sidebar_header_img', website_logo_img)
 set_config('#favicon', website_logo_img)
-
+if (website_notice_show) {
+    set_config('.notice_card_title', website_notice_title)
+    set_config('.notice_card_text', website_notice_text)
+}
 
 // 2. 数据加载
 fetch('data/website.json')
@@ -252,3 +272,4 @@ fetch('data/website.json')
         // 初始化
         init_page()
     });
+
