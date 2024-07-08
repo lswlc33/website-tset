@@ -47,7 +47,6 @@ function show_select(div, select_css, callback = null) {
             if (callback) { callback() }
         });
     });
-    console.log(elements)
     elements[0].click();
 }
 
@@ -115,10 +114,10 @@ function createCards(data) {
                 });
 
                 new_site.innerHTML = `
-          <div class="tab_site">
+        <div class="tab_site" title="${site.desc}">
             <div class="tab_site_title">${site.title}</div>
             <div class="tab_site_desc">${site.desc}</div>
-          </div>`;
+        </div>`;
 
                 new_tab_sites_group.appendChild(new_site);
             });
@@ -221,14 +220,29 @@ function init_page() {
         })
     })
 
-    // 侧边栏点击跳转
+    // 侧边栏大类点击跳转
     document.querySelectorAll(".sidebar_item_title").forEach((ele) => {
         ele.addEventListener('click', () => {
             sidebar_blur_bg_hide()
             let currect_div = ele.parentElement
             let currect_index = Array.from(currect_div.parentElement.children).indexOf(currect_div)
-            let taget_div = document.querySelectorAll('.card_title')[currect_index]
-            taget_div.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            let target_div = document.querySelectorAll('.card_title')[currect_index]
+            target_div.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        })
+    })
+    // 侧边栏小类点击跳转
+    document.querySelectorAll(".sidebar_item_more_item").forEach((ele) => {
+        ele.addEventListener('click', () => {
+            sidebar_blur_bg_hide()
+            let currect_div = ele.parentElement.parentElement
+            let currect_index = Array.from(currect_div.parentElement.children).indexOf(currect_div)
+            let target_div = document.querySelectorAll('.card_title')[currect_index]
+            target_div.scrollIntoView({ behavior: 'smooth', block: 'start' })
+
+            let currect_div1 = ele
+            let currect_index1 = Array.from(currect_div1.parentElement.children).indexOf(currect_div1)
+            let target_div1 = document.querySelectorAll('.tabs')[currect_index].childNodes[currect_index1]
+            target_div1.click()
         })
     })
 }
@@ -259,10 +273,12 @@ set_config('#favicon', website_logo_img)
 if (website_notice_show) {
     set_config('.notice_card_title', website_notice_title)
     set_config('.notice_card_text', website_notice_text)
+    set_config('.notice_card_close', notice_card_close_text)
+    
 }
 
 // 2. 数据加载
-fetch('data/website.json')
+fetch(nav_data_source)
     .then(response => response.json())
     .then(data => {
         // 创建侧边栏与卡片
@@ -272,4 +288,3 @@ fetch('data/website.json')
         // 初始化
         init_page()
     });
-

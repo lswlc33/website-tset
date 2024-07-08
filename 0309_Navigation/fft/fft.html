@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>量产网页</title>
+</head>
+
+<body>
+    <div id="fft_div">
+        <div id="title">
+            关于网页
+        </div>
+        <div id="text">
+            节选自 README.md
+            <br> ## 目录文件说明
+            <br>
+            <br>```
+            <br> |
+            <br> |--- css\ 样式
+            <br> |--- data\ 网站设置与数据
+            <br> |--- config.js 网站设置
+            <br> |--- website.json 导航数据
+            <br> |--- img\ 图片
+            <br> |--- js\ js文件
+            <br> |--- index.html 首页
+            <br> |--- README.md 说明文档
+            <br>```
+            <br>
+            <br>## 原理说明
+            <br>
+            <br>通过 `fetch` 读取 `config.js` 的 `nav_data_source` 值获取用户提供的导航数据来生成导航页面。
+            <br>`nav_data_source` 值可以是本地文件，也可以是网络文件。
+            <br>只需要修改 `nav_data_source` 值，或者修改 `website.json` 文件内容，刷新网页即可实现更新。
+            <br>
+            <br>## 功能说明
+            <br>
+            <br>- 导航数据支持用户自定义
+            <br>- 部分网页自定义可以通过 `config.js` 来快速修改
+            <br>- 支持首次公告（广告）展示
+            <br>- 点击侧栏项目快速导航到目标位置
+
+        </div>
+    </div>
+    <div id="back" onclick="history.back()">返回</div>
+</body>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    #fft_div {
+        background-color: rgba(255, 255, 255, 0.717);
+        border-radius: 20px;
+        margin: 50px;
+        padding: 20px;
+        height: 500px;
+        overflow-y: scroll;
+    }
+
+    #title {
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+    #text {
+        word-break: break-word;
+    }
+
+    body {
+        background: linear-gradient(45deg, #2bffcd, #d014ff);
+        height: 800px;
+    }
+
+    #back {
+        text-align: center;
+        font-size: 25px;
+    }
+</style>
+
+</html>

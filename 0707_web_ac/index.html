@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AC</title>
+    <link rel="stylesheet" href="global.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="bg">
+        <div class="title">在线空调</div>
+        <div class="title_desc"></div>
+        <div class="main">
+            <div class="cn_waike">
+                <div class="cn_nengxiatu">
+                    <div class="cn_nengtiao_bg"></div>
+                </div>
+                <div class="cn_wenduzhishiqi">
+                    <div class="cn_wendu">00</div>
+                    <div class="cn_danwei">°</div>
+                </div>
+                <div class="cn_zhishideng">
+                    <div class="cn_dianyuan"></div>
+                    <div class="cn_moshi"></div>
+                </div>
+                <div class="cn_chufengkou"></div>
+            </div>
+            <div class="air">|</div>
+        </div>
+        <div class="control_group">
+            <div class="control_buttom" onclick="ac.run_switch()">开关</div>
+            <div class="control_buttom" onclick="ac.mode_switch()">模式</div>
+            <div class="control_buttom" onclick="ac.tem_change(0)">-</div>
+            <div class="control_buttom" onclick="ac.tem_change(1)">+</div>
+        </div>
+    </div>
+
+</body>
+<script src="my.js"></script>
+
+</html>

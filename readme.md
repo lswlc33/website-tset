@@ -7,49 +7,52 @@
 
 > 仓库已绑定域名  
 > 可把 `lswlc33.github.io/website-tset` 替换为 `webtest.雪中明月.top`  
-> 例如：https://webtest.雪中明月.top/bachong
+> 例如：<https://webtest.雪中明月.top/bachong>
 
 ## 目录
 
-1. https://lswlc33.github.io/website-tset/bachong  
+1. <https://lswlc33.github.io/website-tset/bachong>  
    点击屏幕飘过图片
 
-2. https://lswlc33.github.io/website-tset/home  
+2. <https://lswlc33.github.io/website-tset/home>  
    个人主页模仿自 [imsyy の home](https://github.com/imsyy/home)  
    此版本存档，最新版移步[我的主页](https://github.com/lswlc33/lswlc33)
 
-3. https://lswlc33.github.io/website-tset/login  
+3. <https://lswlc33.github.io/website-tset/login>  
    简单的登录界面
 
-4. https://lswlc33.github.io/website-tset/musicplayer  
+4. <https://lswlc33.github.io/website-tset/musicplayer>  
    一个里面只有一首歌的播放器
 
-5. https://lswlc33.github.io/website-tset/zimeng  
+5. <https://lswlc33.github.io/website-tset/zimeng>  
    界面模仿 [ChatGPT-Next-Web](https://github.com/Yidadaa/ChatGPT-Next-Web) ，点击会切换随机表情
 
-6. https://lswlc33.github.io/website-tset/yuanshen  
+6. <https://lswlc33.github.io/website-tset/yuanshen>  
    原神开屏动画+自带下载原神
 
-7. https://lswlc33.github.io/website-tset/kafuka  
+7. <https://lswlc33.github.io/website-tset/kafuka>  
    带设置 UI 的 [1.bachong](https://lswlc33.github.io/website-tset/bachong) 也就是第一个
 
-8. https://lswlc33.github.io/website-tset/cemiuiler  
+8. <https://lswlc33.github.io/website-tset/cemiuiler>  
    界面模仿 VSCodeUI
 
-9. https://lswlc33.github.io/website-tset/mToast  
+9. <https://lswlc33.github.io/website-tset/mToast>  
    一个简约 Toast.js
 
-10. https://lswlc33.github.io/website-tset/spbg  
+10. <https://lswlc33.github.io/website-tset/spbg>  
    为背景添加简单鼠标响应的动态效果
 
-11. https://lswlc33.github.io/website-tset/donate  
+11. <https://lswlc33.github.io/website-tset/donate>  
    一个简单的黑白双色捐赠页面
 
-12. https://lswlc33.github.io/website-tset/updowncase  
+12. <https://lswlc33.github.io/website-tset/updowncase>  
    字符转换工具，用于生成上下标
 
-13. https://lswlc33.github.io/website-tset/0309_Navigation  
+13. <https://lswlc33.github.io/website-tset/0309_Navigation>  
    一个基于单文件配置文件的纯静态导航
 
-14. https://lswlc33.github.io/website-tset/0325_scf_vercel  
+14. <https://lswlc33.github.io/website-tset/0325_scf_vercel>  
    deploy 到 vercel
+
+15. <https://lswlc33.github.io/website-tset/0707_web_ac>  
+   一个网页小空调
