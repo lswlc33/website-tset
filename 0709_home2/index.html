@@ -84,6 +84,7 @@
         function onMouseMove(e) {
             if (!isSideMoving) return;
             const newPaddingRight = initialPaddingRight + initialPaddingLeft - e.clientX;
+            currentX = e.clientX
             sideBar.style.right = `${newPaddingRight}px`;
         }
 
@@ -121,10 +122,13 @@
         function autoSnap() {
             let sideRight = parseInt(sideBar.style.right || 0);
             if (sideRight < 0) sideBar.style.right = '0';
-            if (sideRight > document.documentElement.clientWidth - 80) sideBar.style.right = `${document.documentElement.clientWidth - 80}px`;
+            if (sideRight > document.documentElement.clientWidth - 80) {
+                sideBar.style.right = `${document.documentElement.clientWidth - 80}px`
+            };
             if (sideRight > 0 && sideRight < document.documentElement.clientWidth - 80) {
                 const isLeft = currentX < document.documentElement.clientWidth / 2;
-                sideBar.style.right = `${sideRight + (isLeft ? 5 : -5)}px`;
+                console.log(isLeft,currentX , document.documentElement.clientWidth / 2)
+                sideBar.style.right = `${sideRight + (isLeft ? 10 : -10)}px`;
                 requestAnimationFrame(autoSnap);
             }
         }
@@ -135,7 +139,7 @@
             const indexPer = sideRight / document.documentElement.clientWidth;
             indexList.style.left = `-${sideRight / 5}px`;
             navList.style.right = `${sideRight - document.documentElement.clientWidth + 80}px`;
-            indexList.style.filter = `blur(${indexPer * 30}px) brightness(${(1 - indexPer * 0.8)})`;
+            indexList.style.filter = `blur(${indexPer * 20}px) brightness(${(1 - indexPer * 0.8)})`;
             requestAnimationFrame(sideBarLoop);
         }
 
