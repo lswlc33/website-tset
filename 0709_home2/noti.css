@@ -198,6 +198,12 @@ body {
   overflow-x: hidden;
 }
 
+.nav_list,
+.nav_list > div {
+  user-select: auto;
+  touch-action: auto;
+}
+
 .nav_block {
   box-sizing: border-box;
   width: 80%;
