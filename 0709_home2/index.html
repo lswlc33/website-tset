@@ -30,9 +30,9 @@
         </div>
         <div class="side_bar_main">
             <div class="side_bar_main_list">
-                <div class="side_bar_main_item" onclick="index_switch_to(1)"><img src="image/ic_home.svg" alt=""></div>
-                <div class="side_bar_main_item" onclick="index_switch_to(2)"><img src="image/ic_cloud.svg" alt=""></div>
-                <div class="side_bar_main_item" onclick="index_switch_to(3)"><img src="image/ic_music.svg" alt=""></div>
+                <div class="side_bar_main_item" onclick="switchIndexPage(1)"><img src="image/ic_home.svg" alt=""></div>
+                <div class="side_bar_main_item" onclick="switchIndexPage(2)"><img src="image/ic_cloud.svg" alt=""></div>
+                <div class="side_bar_main_item" onclick="switchIndexPage(3)"><img src="image/ic_music.svg" alt=""></div>
             </div>
         </div>
         <div class="side_bar_tips"></div>
@@ -47,75 +47,106 @@
         <div class="nav_block">打打打打哇 </div>
     </div>
     <script>
-        let index_items = document.querySelectorAll(".index_item")
-        let index_list = document.querySelector(".index_list")
-        let side_bar = document.querySelector(".side_bar")
-        let nav_list = document.querySelector(".nav_list")
+        const indexItems = document.querySelectorAll('.index_item');
+        const indexList = document.querySelector('.index_list');
+        const sideBar = document.querySelector('.side_bar');
+        const navList = document.querySelector('.nav_list');
 
-        let is_side_move = false
-
+        let isSideMoving = false;
+        let initialPaddingRight;
+        let initialPaddingLeft;
+        let currentX = 0;
 
         // 首页翻页函数
-        function index_switch_to(page) {
-            let ty = - (page - 1) * 100
-            index_items.forEach((index_item) => {
-                index_item.classList.add("index_item_tran")
+        function switchIndexPage(page) {
+            const translateY = -(page - 1) * 100;
+            indexItems.forEach(item => {
+                item.classList.add('index_item_tran');
                 setTimeout(() => {
-                    index_list.style.transform = `translateY(${ty}dvh)`
+                    indexList.style.transform = `translateY(${translateY}vh)`;
                 }, 250);
-
                 setTimeout(() => {
-                    index_item.classList.remove("index_item_tran")
+                    item.classList.remove('index_item_tran');
                 }, 500);
-            })
+            });
         }
 
-
-        side_bar.addEventListener("mousedown", (e) => {
-            window.addEventListener("mousemove", mousemove)
-            is_side_move = true
-            init_padding_right = parseInt(side_bar.style.right)
-            init_padding_left = e.clientX
-        });
-
-        side_bar.addEventListener("mouseup", (e) => {
-            let is_left = e.clientX < window.innerWidth / 2 ? true : false
-            window.removeEventListener("mousemove", mousemove)
-            is_side_move = false
-
-            // 拖动自动吸附
-            let to_side = () => {
-                if (is_side_move) return // 防止重复操作冲突
-                let side_right = parseInt(side_bar.style.right)
-                // 移动超出处理
-                if (side_right < 0) { side_bar.style.right = 0 }
-                if (side_right > window.innerWidth - 80) { side_bar.style.right = window.innerWidth - 80 }
-                // 移动
-                if ((is_left && side_right < window.innerWidth - 80) || (!is_left && side_right > 0)) {
-                    side_bar.style.right = `${side_right + (is_left ? 5 : -5)}px`
-                    requestAnimationFrame(to_side)
-                }
-            };
-            requestAnimationFrame(to_side)
-        })
-
-        function mousemove(e) {
-            let padding_right = init_padding_right + init_padding_left - e.clientX
-            side_bar.style.right = `${padding_right}px`
+        // 鼠标按下事件
+        function onMouseDown(e) {
+            window.addEventListener('mousemove', onMouseMove);
+            isSideMoving = true;
+            initialPaddingRight = parseInt(sideBar.style.right || 0);
+            initialPaddingLeft = e.clientX;
         }
 
-        // 侧边栏移动跟随
-        side_loop = () => {
-            let side_right = parseInt(side_bar.style.right)
-            let index_per = side_right / window.innerWidth
-            index_list.style.left = `-${side_right / 5}px`
-            nav_list.style.right = `${side_right - window.innerWidth + 80}px`
-            index_list.style.filter = `blur(${index_per * 30}px) brightness(${(1 - index_per * 0.8)})`
-            // requestAnimationFrame(side_loop)
+        // 鼠标移动事件
+        function onMouseMove(e) {
+            if (!isSideMoving) return;
+            const newPaddingRight = initialPaddingRight + initialPaddingLeft - e.clientX;
+            sideBar.style.right = `${newPaddingRight}px`;
         }
-        setInterval(() => {
-            requestAnimationFrame(side_loop)
-        }, 10);
+
+        // 鼠标松开事件
+        function onMouseUp(e) {
+            window.removeEventListener('mousemove', onMouseMove);
+            isSideMoving = false;
+            autoSnap();
+        }
+
+        // 触摸开始事件
+        function onTouchStart(e) {
+            window.addEventListener('touchmove', onTouchMove);
+            isSideMoving = true;
+            initialPaddingRight = parseInt(sideBar.style.right || 0);
+            initialPaddingLeft = e.touches[0].clientX;
+        }
+
+        // 触摸移动事件
+        function onTouchMove(e) {
+            if (!isSideMoving) return;
+            currentX = e.touches[0].clientX;
+            const deltaX = currentX - initialPaddingLeft;
+            sideBar.style.right = `${initialPaddingRight - deltaX}px`;
+        }
+
+        // 触摸结束事件
+        function onTouchEnd(e) {
+            window.removeEventListener('touchmove', onTouchMove);
+            isSideMoving = false;
+            autoSnap();
+        }
+
+        // 自动吸附逻辑
+        function autoSnap() {
+            let sideRight = parseInt(sideBar.style.right || 0);
+            if (sideRight < 0) sideBar.style.right = '0';
+            if (sideRight > window.innerWidth - 80) sideBar.style.right = `${window.innerWidth - 80}px`;
+            if (sideRight > 0 && sideRight < window.innerWidth - 80) {
+                const isLeft = currentX < window.innerWidth / 2;
+                sideBar.style.right = `${sideRight + (isLeft ? 5 : -5)}px`;
+                requestAnimationFrame(autoSnap);
+            }
+        }
+
+        // 侧边栏移动跟随逻辑
+        function sideBarLoop() {
+            const sideRight = parseInt(sideBar.style.right || 0);
+            const indexPer = sideRight / window.innerWidth;
+            indexList.style.left = `-${sideRight / 5}px`;
+            navList.style.right = `${sideRight - window.innerWidth + 80}px`;
+            indexList.style.filter = `blur(${indexPer * 30}px) brightness(${(1 - indexPer * 0.8)})`;
+            requestAnimationFrame(sideBarLoop);
+        }
+
+        // 事件绑定
+        sideBar.addEventListener('mousedown', onMouseDown);
+        sideBar.addEventListener('mouseup', onMouseUp);
+        sideBar.addEventListener('touchstart', onTouchStart);
+        sideBar.addEventListener('touchend', onTouchEnd);
+
+        // 初始化侧边栏移动跟随
+        requestAnimationFrame(sideBarLoop);
+
     </script>
 </body>
 
