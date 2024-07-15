@@ -30,9 +30,9 @@
         </div>
         <div class="side_bar_main">
             <div class="side_bar_main_list">
-                <div class="side_bar_main_item" onclick="switchIndexPage(1)"><img src="image/ic_home.svg" alt=""></div>
-                <div class="side_bar_main_item" onclick="switchIndexPage(2)"><img src="image/ic_cloud.svg" alt=""></div>
-                <div class="side_bar_main_item" onclick="switchIndexPage(3)"><img src="image/ic_music.svg" alt=""></div>
+                <div class="side_bar_main_item" onclick="index_switch_to(1)"><img src="image/ic_home.svg" alt=""></div>
+                <div class="side_bar_main_item" onclick="index_switch_to(2)"><img src="image/ic_cloud.svg" alt=""></div>
+                <div class="side_bar_main_item" onclick="index_switch_to(3)"><img src="image/ic_music.svg" alt=""></div>
             </div>
         </div>
         <div class="side_bar_tips"></div>
@@ -58,17 +58,18 @@
         let currentX = 0;
 
         // 首页翻页函数
-        function switchIndexPage(page) {
-            const translateY = -(page - 1) * 100;
-            indexItems.forEach(item => {
-                item.classList.add('index_item_tran');
+        function index_switch_to(page) {
+            let ty = - (page - 1) * 100
+            indexItems.forEach((index_item) => {
+                index_item.classList.add("index_item_tran")
                 setTimeout(() => {
-                    indexList.style.transform = `translateY(${translateY}vh)`;
+                    indexList.style.transform = `translateY(${ty}dvh)`
                 }, 250);
+
                 setTimeout(() => {
-                    item.classList.remove('index_item_tran');
+                    index_item.classList.remove("index_item_tran")
                 }, 500);
-            });
+            })
         }
 
         // 鼠标按下事件
@@ -120,9 +121,9 @@
         function autoSnap() {
             let sideRight = parseInt(sideBar.style.right || 0);
             if (sideRight < 0) sideBar.style.right = '0';
-            if (sideRight > window.innerWidth - 80) sideBar.style.right = `${window.innerWidth - 80}px`;
-            if (sideRight > 0 && sideRight < window.innerWidth - 80) {
-                const isLeft = currentX < window.innerWidth / 2;
+            if (sideRight > document.documentElement.clientWidth - 80) sideBar.style.right = `${document.documentElement.clientWidth - 80}px`;
+            if (sideRight > 0 && sideRight < document.documentElement.clientWidth - 80) {
+                const isLeft = currentX < document.documentElement.clientWidth / 2;
                 sideBar.style.right = `${sideRight + (isLeft ? 5 : -5)}px`;
                 requestAnimationFrame(autoSnap);
             }
@@ -131,9 +132,9 @@
         // 侧边栏移动跟随逻辑
         function sideBarLoop() {
             const sideRight = parseInt(sideBar.style.right || 0);
-            const indexPer = sideRight / window.innerWidth;
+            const indexPer = sideRight / document.documentElement.clientWidth;
             indexList.style.left = `-${sideRight / 5}px`;
-            navList.style.right = `${sideRight - window.innerWidth + 80}px`;
+            navList.style.right = `${sideRight - document.documentElement.clientWidth + 80}px`;
             indexList.style.filter = `blur(${indexPer * 30}px) brightness(${(1 - indexPer * 0.8)})`;
             requestAnimationFrame(sideBarLoop);
         }
