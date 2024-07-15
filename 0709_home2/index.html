@@ -22,7 +22,7 @@
         <div class="index_item" id="sec_page">2</div>
         <div class="index_item" id="th_page">3</div>
     </div>
-    <div class="side_bar" style="right: 0;">
+    <div class="side_bar" style="right: 0; transform: translateX(0px)">
         <div class="side_bar_top">
             <div class="side_bar_user_img"></div>
             <div class="side_bar_user_name">ZYY</div>
@@ -56,14 +56,16 @@
         let initialPaddingRight;
         let initialPaddingLeft;
         let currentX = 0;
+        let sideRight = 0
+        let ty = 0
 
         // 首页翻页函数
         function index_switch_to(page) {
-            let ty = - (page - 1) * 100
+            ty = - (page - 1) * 100
             indexItems.forEach((index_item) => {
                 index_item.classList.add("index_item_tran")
                 setTimeout(() => {
-                    indexList.style.transform = `translateY(${ty}dvh)`
+                    indexList.style.transform = `translateY(${ty}dvh) translateX(-${sideRight / 5}px)`
                 }, 250);
 
                 setTimeout(() => {
@@ -76,7 +78,7 @@
         function onMouseDown(e) {
             window.addEventListener('mousemove', onMouseMove);
             isSideMoving = true;
-            initialPaddingRight = parseInt(sideBar.style.right || 0);
+            initialPaddingRight = parseInt(get_sideRight() || 0);
             initialPaddingLeft = e.clientX;
         }
 
@@ -85,7 +87,7 @@
             if (!isSideMoving) return;
             const newPaddingRight = initialPaddingRight + initialPaddingLeft - e.clientX;
             currentX = e.clientX
-            sideBar.style.right = `${newPaddingRight}px`;
+            set_sideRight(newPaddingRight)
         }
 
         // 鼠标松开事件
@@ -99,7 +101,7 @@
         function onTouchStart(e) {
             window.addEventListener('touchmove', onTouchMove);
             isSideMoving = true;
-            initialPaddingRight = parseInt(sideBar.style.right || 0);
+            initialPaddingRight = parseInt(get_sideRight() || 0);
             initialPaddingLeft = e.touches[0].clientX;
         }
 
@@ -108,7 +110,7 @@
             if (!isSideMoving) return;
             currentX = e.touches[0].clientX;
             const deltaX = currentX - initialPaddingLeft;
-            sideBar.style.right = `${initialPaddingRight - deltaX}px`;
+            set_sideRight(initialPaddingRight - deltaX)
         }
 
         // 触摸结束事件
@@ -118,27 +120,40 @@
             autoSnap();
         }
 
+
+        let get_sideRight = () => {
+            try {
+                return (0 - sideBar.style.transform.match(/translateX\((-\d+)px\)/)[1])
+            } catch (error) {
+                return (sideBar.style.transform.match(/translateX\((\d+)px\)/)[1])
+            }
+
+
+        }
+        let set_sideRight = (x) => {
+            sideBar.style.transform = `translateX(-${x}px)`
+        }
+
         // 自动吸附逻辑
         function autoSnap() {
-            let sideRight = parseInt(sideBar.style.right || 0);
-            if (sideRight < 0) sideBar.style.right = '0';
-            if (sideRight > document.documentElement.clientWidth - 80) {
-                sideBar.style.right = `${document.documentElement.clientWidth - 80}px`
+            get_sideRight()
+            if (get_sideRight() < 0) set_sideRight(0);
+            if (get_sideRight() > document.documentElement.clientWidth - 80) {
+                set_sideRight(document.documentElement.clientWidth - 80)
             };
-            if (sideRight > 0 && sideRight < document.documentElement.clientWidth - 80) {
+            if (get_sideRight() > 0 && get_sideRight() < document.documentElement.clientWidth - 80) {
                 const isLeft = currentX < document.documentElement.clientWidth / 2;
-                console.log(isLeft,currentX , document.documentElement.clientWidth / 2)
-                sideBar.style.right = `${sideRight + (isLeft ? 10 : -10)}px`;
+                set_sideRight(get_sideRight() + (isLeft ? 10 : -10))
                 requestAnimationFrame(autoSnap);
             }
         }
 
         // 侧边栏移动跟随逻辑
         function sideBarLoop() {
-            const sideRight = parseInt(sideBar.style.right || 0);
-            const indexPer = sideRight / document.documentElement.clientWidth;
-            indexList.style.left = `-${sideRight / 5}px`;
-            navList.style.right = `${sideRight - document.documentElement.clientWidth + 80}px`;
+            get_sideRight()
+            const indexPer = get_sideRight() / document.documentElement.clientWidth;
+            indexList.style.transform = `translateY(${ty}dvh) translateX(-${get_sideRight() / 5}px)`
+            navList.style.transform = `translateX(-${get_sideRight() + 80}px)`
             indexList.style.filter = `blur(${indexPer * 20}px) brightness(${(1 - indexPer * 0.8)})`;
             requestAnimationFrame(sideBarLoop);
         }
