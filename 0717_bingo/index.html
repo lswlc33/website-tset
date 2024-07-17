@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=800, initial-scale=1.0">
+    <title>BINGO</title>
+    <script src="js/qr.js"></script>
+</head>
+
+<body>
+    <div>
+        <div class="title"></div>
+        <div class="box_group">
+            <div class="box_line_header">
+                <div class="box_title"></div>
+                <div class="box_desc"></div>
+            </div>
+            <div class="box_line">
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+            </div>
+            <div class="box_line">
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+            </div>
+            <div class="box_line">
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+            </div>
+            <div class="box_line">
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+            </div>
+            <div class="box_line">
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+                <div class="box_item"></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <input type="text" id="text" value=""> <input type="button" value="加载" onclick="load_data_form_text()">
+    </div>
+    <div><input type="button" id="mode_switch" value="编辑模式" onclick="mode_switch()"></div>
+    <div id="qr"></div>
+</body>
+
+<style>
+    * {
+        margin: 0;
+        user-select: none;
+        outline: none;
+        font-family: "comic sans ms", "微软雅黑", "黑体";
+    }
+
+    body {
+        margin: 0 auto;
+        max-width: 640px;
+    }
+
+    body>div {
+        max-width: 600px;
+        margin: 20px;
+        padding: 30px;
+        border-radius: 35px;
+        background: wheat;
+        box-sizing: border-box;
+        box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.4);
+    }
+
+    input {
+        height: 40px;
+        font-size: 18px;
+        border: none;
+        line-height: 18px;
+        border-radius: 20px;
+        padding: 5px 20px;
+    }
+
+    input[type="button"] {
+        height: 50px;
+        transition: 1s;
+    }
+
+    input[type="button"]:hover {
+        background: white;
+    }
+
+    .box_line,
+    .box_line_header,
+    .box_group {
+        display: flex;
+        gap: 10px;
+    }
+
+    .box_group {
+        flex-direction: column;
+    }
+
+    .box_item,
+    .box_title,
+    .box_desc {
+        background: white;
+        padding: 10px;
+        border-radius: 15px;
+        overflow: hidden;
+        word-wrap: break-word;
+        width: 30%;
+        max-width: 80px;
+        height: 40px;
+        box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 1s;
+    }
+
+    .box_item:hover {
+        background: rgb(203, 203, 203);
+    }
+
+
+
+    .box_item::before {
+        content: "丶";
+        width: 0;
+        opacity: 0;
+        transition: 1s;
+        color: white;
+    }
+
+
+    .is-checked {
+        background: rgb(94, 94, 94);
+        color: white;
+        font-weight: bold;
+    }
+
+    .is-checked:hover {
+        background: rgb(94, 94, 94);
+    }
+
+
+    .is-checked::before {
+        width: 15px;
+        opacity: 1;
+    }
+
+
+    .box_title,
+    .box_desc {
+        height: 70px;
+        margin-bottom: 10px;
+    }
+
+    .box_title {
+        width: 60%;
+        max-width: 300px;
+        font-size: 30px;
+        font-weight: bolder;
+    }
+
+    .box_desc {
+        width: 40%;
+        max-width: 300px;
+    }
+</style>
+
+<script>
+    let mode = 0    // 0: 选择模式  1: 编辑模式
+    let data = [
+        "Bingo Title", "This is a Bingo game!<br>This is a Bingo game!",
+        "会睡觉", "123", "123", "123", "123",
+        "会打人", "会喝水", "123", "喵", "？",
+        "害怕", "123", "123", "123", "123",
+        "223", "会飞", "123", "会跳", "123",
+        "看我看我", "会呼呼呼", "123", "123", "123",
+    ]
+
+    // data = [
+    //     "小南梁宾果游戏", "This is a Bingo game!<br>This is a Bingo game!",
+    //     "男的","穿过女装COS","刮过腿毛其他部位毛","化过妆","留过长发",
+    //     "喜欢粉色","穿过黑丝","经常独自发","使用护肤品",
+    //     "在意自己的样貌/身材","做指甲","比较瘦","穿过jk","会给头发做造型",
+    //     "爱看性转/伪娘番剧","被人喊过美女/被认出女装","被女生当闺蜜","在成都",
+    //     "穿过lolita","想过当本子女主角","每天刷到男主角",
+    //     "想要拥有奈子","被人说过，兄弟你好香","四爱","想要成为可爱的女孩子"
+    // ]
+
+    let title = document.querySelector(".box_title")
+    let desc = document.querySelector(".box_desc")
+    let items = document.querySelectorAll(".box_item")
+    let qrcode
+
+    // 按钮点击事件
+    let item_click = (e) => {
+        if (mode) { return }    // 编辑模式不点击
+        if (e.target == title || e.target == desc) {
+            return  // 标题栏不可选择
+        }
+        if (e.target.classList.contains('is-checked')) {
+            e.target.classList.remove('is-checked');
+        } else {
+            e.target.classList.add('is-checked');
+        }
+    }
+
+    // 模式切换
+    let mode_switch = () => {
+        let start_index = 0
+        items.forEach((item) => {
+            if (start_index >= 27) return
+            start_index++
+            if (mode) {
+                item.classList.remove('is-editing');
+                item.removeAttribute("contenteditable")
+            } else {
+                item.classList.add('is-editing');
+                item.setAttribute("contenteditable", "")
+                if (item.classList.contains('is-checked')) {
+                    item.classList.remove('is-checked');
+                }   // 清理选择模式已经选择的
+            }
+        })
+        mode = !mode
+        update_data() // 更新修改的数据到data
+        document.querySelector("#mode_switch").value = mode ? "切换到游戏模式" : "切换到编辑模式"
+    }
+
+    // 添加点击事件
+    let add_item_click = () => {
+        title.addEventListener("click", item_click)
+        desc.addEventListener("click", item_click)
+        let start_index = 2
+        items.forEach((item) => {
+            if (start_index >= 27) return
+            start_index++
+            item.addEventListener("click", item_click)
+        })
+    }
+
+    // 从编辑模式结果加载data
+    let update_data = () => {
+        data[0] = title.innerHTML
+        data[1] = desc.innerHTML
+        let start_index = 2
+        items.forEach((item) => {
+            if (start_index >= 27) return
+            data[start_index++] = item.innerHTML
+        })
+        console.log(1);
+        
+        update_UI()
+    }
+
+    // 从url加载data
+    let load_data_form_url = () => {
+        let hash = window.location.hash
+        if (!hash) return
+        data = decodeURIComponent(hash.split('#')[1]).split(',')
+        update_UI()
+
+    }
+
+    // 从输入框加载data
+    let load_data_form_text = () => {
+        data = document.querySelector("#text").value.split(',')
+        update_UI()
+
+
+    }
+    // data数据展现到输入框
+    let update_text = () => {
+        document.querySelector("#text").value = data
+    }
+
+    // data数据展现到网页
+    let update_UI = () => {
+        title.innerHTML = data[0]
+        desc.innerHTML = data[1]
+        let start_index = 2
+        items.forEach((item) => {
+            if (start_index >= 27) return
+            item.innerHTML = data[start_index++]
+        })
+        console.log(2);
+        update_url()
+        update_qr()
+        update_text()
+    }
+
+    // data数据展现到url
+    let update_url = () => {
+        window.location.hash = encodeURIComponent(data);
+    }
+
+    // data数据展现到二维码
+    let update_qr = () => {
+        document.getElementById("qr").innerHTML = ''
+        qrcode = new QRCode(document.getElementById("qr"), {
+            text: window.location.href,
+            correctLevel: QRCode.CorrectLevel.L
+        });
+        console.log(3);
+    }
+
+
+    add_item_click()
+
+    load_data_form_url()
+
+    update_UI()
+    update_url()
+    update_qr()
+
+
+
+
+
+
+</script>
+
+</html>

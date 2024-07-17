@@ -68,10 +68,10 @@ body {
 
 @keyframes slidein {
   from {
-    transform: translateX(0%);
+    transform: translateX(0%) translate3d(1, 1, 1);
   }
   to {
-    transform: translateX(100%);
+    transform: translateX(100%) translate3d(1, 1, 1);
   }
 }
 

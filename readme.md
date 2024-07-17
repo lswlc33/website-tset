@@ -58,3 +58,6 @@
    一个网页小空调
 16. <https://lswlc33.github.io/website-tset/0709_home2>  
    双页的个人主页面板
+   
+16. <https://lswlc33.github.io/website-tset/0717_bingo>  
+   BINGO游戏
