@@ -9,6 +9,24 @@
 </head>
 
 <body>
+    <button id="theme_toggle" title="Toggle dark/light mode">
+        <div id="toggle_icon">
+            <svg id="sun_icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg id="moon_icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+        </div>
+    </button>
     <div id="background">
         <div id="content">
             <div id="title">Donate</div>
@@ -113,6 +131,106 @@
     #wechat {
         display: none;
     }
+
+    #theme_toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 3px solid black;
+        background: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        transition: background-color 0.6s, border-color 0.6s, transform 0.3s;
+        overflow: hidden;
+    }
+
+    #theme_toggle:hover {
+        transform: scale(1.1);
+    }
+
+    #toggle_icon {
+        width: 26px;
+        height: 26px;
+        position: relative;
+    }
+
+    #toggle_icon svg {
+        width: 26px;
+        height: 26px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: opacity 0.4s, transform 0.5s;
+    }
+
+    #sun_icon {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+        color: black;
+    }
+
+    #moon_icon {
+        opacity: 0;
+        transform: rotate(-90deg) scale(0.5);
+        color: white;
+    }
+
+    #background, #card, #qr_switch_alipay, #qr_switch_wechat, #theme_toggle {
+        transition: background-color 0.6s, color 0.6s, border-color 0.6s;
+    }
+
+    .qr_code_img {
+        transition: filter 0.6s;
+    }
+
+    body.dark #background {
+        background-color: #1a1a2e;
+    }
+
+    body.dark #title {
+        color: #e0e0e0;
+    }
+
+    body.dark #card {
+        border-color: #e0e0e0;
+        color: #e0e0e0;
+    }
+
+    body.dark #qr_switch_alipay {
+        background-color: #e0e0e0;
+        color: #1a1a2e;
+        border-color: #e0e0e0;
+    }
+
+    body.dark #qr_switch_wechat {
+        border-color: #e0e0e0;
+        color: #e0e0e0;
+    }
+
+    body.dark .qr_code_img {
+        filter: invert(1);
+    }
+
+    body.dark #theme_toggle {
+        background: #1a1a2e;
+        border-color: #e0e0e0;
+    }
+
+    body.dark #sun_icon {
+        opacity: 0;
+        transform: rotate(90deg) scale(0.5);
+    }
+
+    body.dark #moon_icon {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
 </style>
 
 <script>
@@ -120,26 +238,69 @@
     var wechat = document.getElementById('wechat');
     var qr_switch_alipay = document.getElementById('qr_switch_alipay');
     var qr_switch_wechat = document.getElementById('qr_switch_wechat');
+    var themeToggle = document.getElementById('theme_toggle');
+
+    var isDark = false;
+
+    themeToggle.addEventListener('click', function () {
+        isDark = !isDark;
+        document.body.classList.toggle('dark', isDark);
+
+        var activeBtn = isDark ? qr_switch_alipay : qr_switch_alipay;
+        if (alipay.style.display !== 'none' && wechat.style.display !== 'block') {
+            updateSwitchStyle('alipay');
+        } else {
+            updateSwitchStyle('wechat');
+        }
+    });
+
+    function updateSwitchStyle(active) {
+        if (isDark) {
+            if (active === 'alipay') {
+                qr_switch_alipay.style.backgroundColor = '#e0e0e0';
+                qr_switch_alipay.style.color = '#1a1a2e';
+                qr_switch_alipay.style.borderColor = '#e0e0e0';
+                qr_switch_wechat.style.backgroundColor = '#1a1a2e';
+                qr_switch_wechat.style.color = '#e0e0e0';
+                qr_switch_wechat.style.borderColor = '#e0e0e0';
+            } else {
+                qr_switch_wechat.style.backgroundColor = '#e0e0e0';
+                qr_switch_wechat.style.color = '#1a1a2e';
+                qr_switch_wechat.style.borderColor = '#e0e0e0';
+                qr_switch_alipay.style.backgroundColor = '#1a1a2e';
+                qr_switch_alipay.style.color = '#e0e0e0';
+                qr_switch_alipay.style.borderColor = '#e0e0e0';
+            }
+        } else {
+            if (active === 'alipay') {
+                qr_switch_alipay.style.backgroundColor = 'black';
+                qr_switch_alipay.style.color = 'white';
+                qr_switch_alipay.style.borderColor = 'black';
+                qr_switch_wechat.style.backgroundColor = 'white';
+                qr_switch_wechat.style.color = 'black';
+                qr_switch_wechat.style.borderColor = 'black';
+            } else {
+                qr_switch_wechat.style.backgroundColor = 'black';
+                qr_switch_wechat.style.color = 'white';
+                qr_switch_wechat.style.borderColor = 'black';
+                qr_switch_alipay.style.backgroundColor = 'white';
+                qr_switch_alipay.style.color = 'black';
+                qr_switch_alipay.style.borderColor = 'black';
+            }
+        }
+    }
 
     qr_switch_alipay.addEventListener('click', function () {
         alipay.style.display = 'block';
         wechat.style.display = 'none';
-        qr_switch_alipay.style.backgroundColor = 'black';
-        qr_switch_wechat.style.backgroundColor = 'white';
-        qr_switch_alipay.style.color = 'white';
-        qr_switch_wechat.style.color = 'black';
-
-    })
+        updateSwitchStyle('alipay');
+    });
 
     qr_switch_wechat.addEventListener('click', function () {
         alipay.style.display = 'none';
         wechat.style.display = 'block';
-        qr_switch_alipay.style.backgroundColor = 'white';
-        qr_switch_wechat.style.backgroundColor = 'black';
-        qr_switch_alipay.style.color = 'black';
-        qr_switch_wechat.style.color = 'white';
-
-    })
+        updateSwitchStyle('wechat');
+    });
 
 </script>
 
